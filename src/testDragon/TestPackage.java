@@ -9,7 +9,7 @@ public class TestPackage extends BlazePackage
 {
     TestPackage()
     {
-        super();
+        super((short)5);
     }
 
     @Override
