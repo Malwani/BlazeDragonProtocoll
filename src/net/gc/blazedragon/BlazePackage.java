@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Benny on 28.02.2015.
+ * Created by Malwani on 28.02.2015.
  */
 
 public abstract class BlazePackage implements BlazeModule

@@ -1,7 +1,7 @@
 package net.gc.blazedragon;
 
 /**
- * Created by Benny on 27.03.2015.
+ * Created by Malwani on 27.03.2015.
  */
 public class UnfittingBlazeDataException extends Exception
 {
