@@ -27,7 +27,7 @@ public class Test
     {
         byte[] bytes;
         long timeBefore, timeAfter;
-        BlazeSignal bs = new BlazeSignal("Test");
+        BlazeSignal bs = new BlazeSignal("Hallo Leon! :)");
 
         System.out.println("Type: " + bs.getType() + "| Value: " + bs.getDataStr());
 
@@ -53,7 +53,7 @@ public class Test
     {
         byte[] bytes;
         long timeBefore,timeAfter;
-        BlazeSignal bs = new BlazeSignal("Legalize Marijuana!");
+        BlazeSignal bs = new BlazeSignal("Hallo Leon! :)");
 
         System.out.println("Berechne...");
         timeBefore = System.currentTimeMillis();
