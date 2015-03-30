@@ -13,8 +13,9 @@ public abstract class BlazePackage implements BlazeModule
     public  List<BlazeSignal>  blazeSignals;
     private List<Byte>         blazeSignalTypeValues;
 
-    public BlazePackage()
+    public BlazePackage(short packageID)
     {
+        this.packageID = packageID;
         this.blazeSignalTypeValues = new ArrayList<Byte>();
         this.blazeSignals          = new ArrayList<BlazeSignal>();
 
