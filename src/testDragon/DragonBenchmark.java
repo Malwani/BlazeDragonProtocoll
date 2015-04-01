@@ -22,6 +22,7 @@ public class DragonBenchmark
             System.out.println("_____________________________");
             testShellOne(blazeSignals[0]);
             System.out.println("_____________________________");
+            testShellTwo(blazeSignals);
         }
         catch (UnfittingBlazeDataException ex)
         {
@@ -61,7 +62,7 @@ public class DragonBenchmark
 
         System.out.println("[ TESTE SCHALE 1 ]");
         System.out.println("Type: " + bs.getType() + "| Value: " + bs.getDataStr());
-        System.out.println("Umwandeln in Bytes...");
+        System.out.println("Umwandeln in ByteArray...");
 
         timeBefore = System.currentTimeMillis();
         bytes = BlazeDragon.bs_2_ba(bs);
@@ -93,9 +94,24 @@ public class DragonBenchmark
         }
     }
 
-    private static void testShellTwo()
+    private static void testShellTwo(BlazeSignal[] blazeSignals) throws UnfittingBlazeDataException
     {
+        /* BlazeDragon.bs_array2byte_array();
+        BlazeDragon.byte_array2bs_array();*/
 
+        byte[] bytes;
+        long timeBefore, timeAfter;
+
+        System.out.println("[ TESTE SCHALE 2 ]");
+
+        for(int i = 0; i < 3; i++)
+        {
+            System.out.print("BS" + (i + 1) + " - | Type: " + blazeSignals[i].getType() + "| Value: "
+                    + blazeSignals[i].getDataStr() + '\n');
+        }
+
+        System.out.println("Umwandeln in ByteArray...");
+        bytes = BlazeDragon.bs_array2byte_array(blazeSignals);
     }
 
     private static void testConvertingTime() throws UnfittingBlazeDataException
