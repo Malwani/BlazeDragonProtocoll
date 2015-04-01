@@ -13,7 +13,7 @@ public class DragonBenchmark
 {
     public static void main (String[] args)
     {
-        System.out.println("_____________________________");
+        System.out.println("[ BLAZE BENCHMARK ]");
         System.out.println("_____________________________");
         BlazeSignal[] blazeSignals = readInData();
 
@@ -38,13 +38,13 @@ public class DragonBenchmark
 
         System.out.println("BlazeSignal Input:");
 
-        System.out.print("BS1: ");
+        System.out.print("BS1 - ");
         bs1 = new BlazeSignal(scanner.nextLine());
 
-        System.out.print("BS2: ");
+        System.out.print("BS2 - ");
         bs2 = new BlazeSignal(scanner.nextLine());
 
-        System.out.print("BS3: ");
+        System.out.print("BS3 - ");
         bs3 = new BlazeSignal(scanner.nextLine());
 
         blazeSignals[0] = bs1;
@@ -59,7 +59,7 @@ public class DragonBenchmark
         byte[] bytes;
         long timeBefore, timeAfter;
 
-        System.out.println("[TESTE SCHALE 1]");
+        System.out.println("[ TESTE SCHALE 1 ]");
         System.out.println("Type: " + bs.getType() + "| Value: " + bs.getDataStr());
         System.out.println("Umwandeln in Bytes...");
 
@@ -85,11 +85,11 @@ public class DragonBenchmark
 
         if(bs_new.getDataStr().equals(bs.getDataStr()))
         {
-            System.out.println("[SCHALE 1 : FUNKTIONIERT]");
+            System.out.println("[ SCHALE 1 : FUNKTIONIERT ]");
         }
         else
         {
-            System.out.println("[SCHALE 1 : FEHLERHAFT]");
+            System.out.println("[ SCHALE 1 : FEHLERHAFT ]");
         }
     }
 
