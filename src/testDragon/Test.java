@@ -22,51 +22,29 @@ public class Test
             ex.getMessage();
             ex.printStackTrace();
         }
-
     }
 
     private static void testShells() throws UnfittingBlazeDataException
     {
+        byte[] bytes;
+        long timeBefore, timeAfter;
+        BlazeSignal bs = new BlazeSignal("Dies ist ein kleiner Benchmakrstring.");
 
-        try
+        System.out.println("Type: " + bs.getType() + "| Value: " + bs.getDataStr());
+        System.out.println("Umwandeln in Bytes...");
+        timeBefore = System.currentTimeMillis();
+        bytes = BlazeDragon.bs_2_ba(bs);
+        timeAfter = System.currentTimeMillis();
+
+        System.out.println("Zeit benötigt: " + (timeAfter - timeBefore) + "ms.");
+        System.out.print("Bytes: |");
+        for (byte singleByte : bytes)
         {
-            byte[] bytes;
-            long timeBefore, timeAfter;
-            BlazeSignal bs = new BlazeSignal("Test");
-            Thread.sleep(genRandom(64,256));
-
-            System.out.println("Type: " + bs.getType() + "| Value: " + bs.getDataStr());
-            Thread.sleep(genRandom(64,256));
-            System.out.println("Umwandeln in Bytes...");
-            Thread.sleep(genRandom(64,256));
-            timeBefore = System.currentTimeMillis();
-            Thread.sleep(genRandom(64,256));
-            bytes = BlazeDragon.bs_2_ba(bs);
-            Thread.sleep(genRandom(64,256));
-            timeAfter = System.currentTimeMillis();
-            Thread.sleep(genRandom(64,256));
-
-            System.out.println("Zeit benötigt: " + (timeAfter - timeBefore) + "ms.");
-            Thread.sleep(genRandom(64,256));
-            System.out.print("Bytes: |");
-            Thread.sleep(genRandom(64,256));
-            for (byte singleByte : bytes)
-            {
-                Thread.sleep(genRandom(64,256));
-                System.out.print(Integer.toHexString(singleByte) + "|");
-            }
-            Thread.sleep(genRandom(64,256));
-            System.out.println("\nUmwandeln in Blaze Signal...");
-            Thread.sleep(genRandom(64,256));
-            BlazeSignal bs_new = BlazeDragon.ba_2_bs(bytes);
-            Thread.sleep(genRandom(64,256));
-            System.out.println("Type: " + bs_new.getType() + "| Value: " + bs_new.getDataStr());
-            Thread.sleep(genRandom(64,256));
+            System.out.print(Integer.toHexString(singleByte) + "|");
         }
-        catch(InterruptedException ex)
-        {
-            ex.printStackTrace();
-        }
+        System.out.println("\nUmwandeln in Blaze Signal...");
+        BlazeSignal bs_new = BlazeDragon.ba_2_bs(bytes);
+        System.out.println("Type: " + bs_new.getType() + "| Value: " + bs_new.getDataStr());
     }
 
     private static void testConvertingTime() throws UnfittingBlazeDataException
