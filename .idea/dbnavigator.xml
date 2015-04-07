@@ -30,6 +30,10 @@
       <group-entries value="true" />
       <execution-inputs />
     </execution-history>
+    <argument-values-cache />
+  </component>
+  <component name="DBNavigator.Project.ObjectDependencyManager">
+    <last-used-dependency-type value="INCOMING" />
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections />
@@ -110,15 +114,18 @@
       </lookup-filters>
     </navigation-settings>
     <dataset-grid-settings>
+      <general>
+        <enable-zooming value="true" />
+      </general>
+      <sorting>
+        <nulls-first value="true" />
+        <max-sorting-columns value="4" />
+      </sorting>
       <tracking-columns>
         <columnNames value="" />
         <visible value="true" />
         <editable value="false" />
       </tracking-columns>
-      <sorting>
-        <nulls-first value="true" />
-        <max-sorting-columns value="4" />
-      </sorting>
     </dataset-grid-settings>
     <dataset-editor-settings>
       <text-editor-popup>
@@ -128,7 +135,7 @@
         <popup-delay value="1000" />
       </text-editor-popup>
       <values-list-popup>
-        <active-for-primary-keys value="false" />
+        <show-popup-button value="true" />
         <element-count-threshold value="1000" />
         <data-length-threshold value="250" />
       </values-list-popup>
@@ -165,10 +172,14 @@
       </record-navigation>
     </dataset-editor-settings>
     <code-editor-settings>
-      <values-list-popup>
+      <general>
         <show-object-navigation-gutter value="false" />
         <show-spec-declaration-navigation-gutter value="true" />
-      </values-list-popup>
+      </general>
+      <confirmations>
+        <save-changes value="false" />
+        <revert-changes value="true" />
+      </confirmations>
     </code-editor-settings>
     <code-completion-settings>
       <filters>
@@ -177,8 +188,11 @@
           <filter-element type="RESERVED_WORD" id="function" selected="false" />
           <filter-element type="RESERVED_WORD" id="parameter" selected="false" />
           <filter-element type="RESERVED_WORD" id="datatype" selected="true" />
+          <filter-element type="RESERVED_WORD" id="exception" selected="true" />
           <filter-element type="OBJECT" id="schema" selected="true" />
+          <filter-element type="OBJECT" id="role" selected="true" />
           <filter-element type="OBJECT" id="user" selected="true" />
+          <filter-element type="OBJECT" id="privilege" selected="true" />
           <user-schema>
             <filter-element type="OBJECT" id="table" selected="true" />
             <filter-element type="OBJECT" id="view" selected="true" />
@@ -236,8 +250,11 @@
           <filter-element type="RESERVED_WORD" id="function" selected="true" />
           <filter-element type="RESERVED_WORD" id="parameter" selected="true" />
           <filter-element type="RESERVED_WORD" id="datatype" selected="true" />
+          <filter-element type="RESERVED_WORD" id="exception" selected="true" />
           <filter-element type="OBJECT" id="schema" selected="true" />
           <filter-element type="OBJECT" id="user" selected="true" />
+          <filter-element type="OBJECT" id="role" selected="true" />
+          <filter-element type="OBJECT" id="privilege" selected="true" />
           <user-schema>
             <filter-element type="OBJECT" id="table" selected="true" />
             <filter-element type="OBJECT" id="view" selected="true" />
@@ -292,6 +309,8 @@
         </extended-filter>
       </filters>
       <sorting enabled="true">
+        <sorting-element type="OBJECT" id="role" />
+        <sorting-element type="OBJECT" id="user" />
         <sorting-element type="RESERVED_WORD" id="keyword" />
         <sorting-element type="RESERVED_WORD" id="datatype" />
         <sorting-element type="OBJECT" id="column" />
@@ -327,6 +346,7 @@
       <statement-execution>
         <execution-timeout value="20" />
         <debug-execution-timeout value="600" />
+        <parameter-history-size value="10" />
       </statement-execution>
       <compiler>
         <compile-type value="KEEP" />
@@ -334,6 +354,24 @@
         <always-show-controls value="false" />
       </compiler>
     </execution-engine-settings>
+    <operation-settings>
+      <transactions>
+        <uncommitted-changes>
+          <on-project-close value="ASK" />
+          <on-disconnect value="ASK" />
+          <on-autocommit-toggle value="ASK" />
+        </uncommitted-changes>
+        <multiple-uncommitted-changes>
+          <on-commit value="ASK" />
+          <on-rollback value="ASK" />
+        </multiple-uncommitted-changes>
+      </transactions>
+      <session-browser>
+        <disconnect-session value="ASK" />
+        <kill-session value="ASK" />
+        <reload-on-filter-change value="false" />
+      </session-browser>
+    </operation-settings>
     <ddl-file-settings>
       <extensions>
         <mapping file-type-id="VIEW" extensions="vw" />
@@ -378,5 +416,8 @@
         </visibility-settings>
       </environment>
     </general-settings>
+  </component>
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables />
   </component>
 </project>

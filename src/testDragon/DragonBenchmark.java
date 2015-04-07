@@ -20,7 +20,7 @@ public class DragonBenchmark
         try
         {
             System.out.println("_____________________________");
-            testShellOne(blazeSignals[0]);
+            testShellOne(blazeSignals[1]);
             System.out.println("_____________________________");
             testShellTwo(blazeSignals);
             System.out.println("_____________________________");
@@ -35,7 +35,7 @@ public class DragonBenchmark
     private static BlazeSignal[] readInData()
     {
         Scanner       scanner      = new Scanner(System.in);
-        BlazeSignal[] blazeSignals = new BlazeSignal[3];
+        BlazeSignal[] blazeSignals = new BlazeSignal[4];
         BlazeSignal   bs1,bs2,bs3;
 
         System.out.println("BlazeSignal Input:");
@@ -49,9 +49,12 @@ public class DragonBenchmark
         System.out.print("BS3 - ");
         bs3 = new BlazeSignal(scanner.nextLine());
 
-        blazeSignals[0] = bs1;
-        blazeSignals[1] = bs2;
-        blazeSignals[2] = bs3;
+        BlazeSignal initSignal = new BlazeSignal((short) 10);
+
+        blazeSignals[0] = initSignal;
+        blazeSignals[1] = bs1;
+        blazeSignals[2] = bs2;
+        blazeSignals[3] = bs3;
 
         return blazeSignals;
     }
@@ -105,7 +108,7 @@ public class DragonBenchmark
 
         System.out.println("[ TESTE SCHALE 2 ]");
 
-        for(int i = 0; i < 3; i++)
+        for(int i = 1; i < 4; i++)
         {
             System.out.print("BS" + (i + 1) + " - | Type: " + blazeSignals[i].getType() + "| Value: "
                     + blazeSignals[i].getDataStr() + '\n');
@@ -146,7 +149,6 @@ public class DragonBenchmark
 
         timeBefore = timeAfter-timeBefore;
         System.out.println("Benötigte Zeit: " + timeBefore + "ms." );
-
     }
 
     private static int genRandom(int maximum, int minimum)
