@@ -13,7 +13,7 @@ public class DragonBenchmark
 {
     public static void main (String[] args)
     {
-        System.out.println("[ BLAZE BENCHMARK ]");
+        System.out.println("| BLAZE BENCHMARK |");
         System.out.println("_____________________________");
         BlazeSignal[] blazeSignals = readInData();
 
@@ -64,7 +64,7 @@ public class DragonBenchmark
         byte[] bytes;
         long timeBefore, timeAfter;
 
-        System.out.println("[ TESTE SCHALE 1 ]");
+        System.out.println("| TESTE SCHALE 1 |");
         System.out.println("Type: " + bs.getType() + "| Value: " + bs.getDataStr());
         System.out.println("Umwandeln in ByteArray...");
 
