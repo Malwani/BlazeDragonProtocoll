@@ -19,7 +19,7 @@ public abstract class BlazePackage implements BlazeModule
         this.blazeSignalTypeValues = new ArrayList<Byte>();
         this.blazeSignals          = new ArrayList<BlazeSignal>();
 
-        addBlazeDataType(BlazeDragon.DATA_PACK_DATA);
+        addBlazeDataType(BlazeDragon.DATA_PACK_INIT);
         defineSignals();
         initBlazeSignals();
     }
@@ -37,7 +37,7 @@ public abstract class BlazePackage implements BlazeModule
 
             switch(typeVal)
             {
-                case BlazeDragon.DATA_PACK_DATA:
+                case BlazeDragon.DATA_PACK_INIT:
                 {
                     this.blazeSignals.add(new BlazeSignal((short) 0));
                 }

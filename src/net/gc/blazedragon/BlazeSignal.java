@@ -28,13 +28,13 @@ public class BlazeSignal
     public BlazeSignal(short blazePackIdentifier)
     {
         this.blazePackIdentifier = blazePackIdentifier;
-        this.dataType = BlazeDragon.BLAZE_PACK_DATA ;
+        this.dataType = BlazeDragon.BLAZE_PACK_INIT ;
     }
 
     public BlazeSignal(byte dataPackIdentifier)
     {
         this.dataPackIdentifier = dataPackIdentifier;
-        this.dataType = BlazeDragon.DATA_PACK_DATA ;
+        this.dataType = BlazeDragon.DATA_PACK_INIT ;
     }
 
     public BlazeSignal(boolean boolData)
@@ -66,7 +66,7 @@ public class BlazeSignal
 
     public short getBlazePackIdentifier() throws UnfittingBlazeDataException
     {
-        if (this.dataType == BlazeDragon.BLAZE_PACK_DATA )
+        if (this.dataType == BlazeDragon.BLAZE_PACK_INIT )
         {
             return this.blazePackIdentifier;
         }
@@ -78,7 +78,7 @@ public class BlazeSignal
 
     public byte getDataPackIdentifier() throws UnfittingBlazeDataException
     {
-        if (this.dataType == BlazeDragon.DATA_PACK_DATA )
+        if (this.dataType == BlazeDragon.DATA_PACK_INIT )
         {
             return this.dataPackIdentifier;
         }
@@ -130,7 +130,7 @@ public class BlazeSignal
 
     public void setBlazePackIdentifier(short packInit) throws UnfittingBlazeDataException
     {
-        if(this.dataType == BlazeDragon.BLAZE_PACK_DATA )
+        if(this.dataType == BlazeDragon.BLAZE_PACK_INIT )
         {
             this.blazePackIdentifier = packInit;
         }
@@ -142,7 +142,7 @@ public class BlazeSignal
 
     public void setDataPackIdentifier(byte packInit) throws UnfittingBlazeDataException
     {
-        if(this.dataType == BlazeDragon.DATA_PACK_DATA )
+        if(this.dataType == BlazeDragon.DATA_PACK_INIT )
         {
             this.dataPackIdentifier = packInit;
         }
