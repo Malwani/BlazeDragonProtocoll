@@ -19,23 +19,17 @@ import java.util.*;
 
 public class BlazeDragon
 {
+    public static final byte  WRONG_DATA      = -1 ;
     public static List<Class> blazePackages;
 
     //******************************************************************************************************************//
     //                                       BLAZESIGNAL-DATATYPE INDICATORS                                            //
     //******************************************************************************************************************//
 
-    public static final byte WRONG_DATA      = -1 ;
-    public static final byte BOOLEAN_DATA    = -2 ;
-    public static final byte DOUBLE_DATA     = -3 ;
-    public static final byte STRING_DATA     = -4 ;
-
-    //******************************************************************************************************************//
-    //                                         BLAZEDRAGON-PACK INDICATORS                                              //
-    //******************************************************************************************************************//
-
-    public static final byte DATA_PACK_INIT  = -50;
-    public static final byte BLAZE_PACK_INIT = -60;
+    public static final byte BOOLEAN_DATA   = -2 ;
+    public static final byte DOUBLE_DATA    = -3 ;
+    public static final byte STRING_DATA    = -4 ;
+    public static final byte PACK_INIT_DATA = -50;
 
     //******************************************************************************************************************//
     //                                         BYTE-ARRAY-BINDER-VALUES                                                 //
@@ -73,7 +67,7 @@ public class BlazeDragon
         ByteBuffer             inputByteBuffer = ByteBuffer.wrap(inputArray);
         BlazeSignal[]          output;
 
-        if(inputByteBuffer.get() != DATA_PACK_INIT  )
+        if(inputByteBuffer.get() != PACK_INIT_DATA)
         {
             output = new BlazeSignal[1];
             output[0] = new BlazeSignal();                                                                              // Falsches Signal
@@ -120,7 +114,7 @@ public class BlazeDragon
         ArrayList<byte[]> byteList = new ArrayList<byte[]>(0);                                                          // ArrayList für ByteArrays erstellen
         byte[]            outArray;
 
-        if(bsArray[0].getType() != BLAZE_PACK_INIT )                                                                    // Falsches Signal
+        if(bsArray[0].getType() != PACK_INIT_DATA )                                                                     // Falsches Signal
         {
             outArray = new byte[1];
             outArray[0] = WRONG_DATA;
@@ -190,7 +184,7 @@ public class BlazeDragon
 
                 return new BlazeSignal(Charset.forName("ISO-8859-1").decode(ByteBuffer.wrap(stringBytes)).toString());  // Bytearray in ByteBuffer schreiben und in String konvertieren
             }
-            case BLAZE_PACK_INIT :
+            case PACK_INIT_DATA :
             {
                 return new BlazeSignal(buffer.getShort());                                                              // PackInit-Short aus dem Buffer auslesen und dem neuen Signal übergeben
             }
@@ -259,15 +253,7 @@ public class BlazeDragon
                 buffer.get(byteData);                                                                                   // Buffer in Bytearray schreiben
                 break;
             }
-            case BlazeDragon.DATA_PACK_INIT             :                                                                // Es handelt sich um ein Packetinit-Objekt
-            {
-                byteData    = new byte[2];                                                                              // Länge 2: 1 Byte für Type, 1 Byte für IdentifierByte
-                byteData[0] = bsData.getType();
-                byteData[1] = bsData.getDataPackIdentifier();                                                           // Byte für Byte aus dem Buffer lesen und im Array speichern
-
-                break;
-            }
-            case BlazeDragon.BLAZE_PACK_INIT:
+            case BlazeDragon.PACK_INIT_DATA:
             {
                 byteData    = new byte[3];                                                                              // Länge 3: 1 Byte für Type, 2 Byte für IdentifierShort
                 byteData[0] = bsData.getType();
@@ -275,7 +261,7 @@ public class BlazeDragon
                 buffer.putShort(bsData.getBlazePackIdentifier());
 
                 byteData[1] = buffer.get(0);                                                                            // Erstes "Short Byte" ByteData anfügen (byteData[0] mit Typ belegt)
-                byteData[2] = buffer.get(1);                                                                            // Zweites //
+                byteData[2] = buffer.get(1);                                                                            // Zweites...
 
                 break;
             }

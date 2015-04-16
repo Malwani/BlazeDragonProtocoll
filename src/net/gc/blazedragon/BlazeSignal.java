@@ -15,7 +15,6 @@ public class BlazeSignal
     private byte    dataType;
 
     private short   blazePackIdentifier;
-    private byte    dataPackIdentifier;                                                                                 // beinhaltet DataIndikator
     private boolean boolData;
     private double  doubleData;
     private String  strData;
@@ -28,13 +27,7 @@ public class BlazeSignal
     public BlazeSignal(short blazePackIdentifier)
     {
         this.blazePackIdentifier = blazePackIdentifier;
-        this.dataType = BlazeDragon.BLAZE_PACK_INIT ;
-    }
-
-    public BlazeSignal(byte dataPackIdentifier)
-    {
-        this.dataPackIdentifier = dataPackIdentifier;
-        this.dataType = BlazeDragon.DATA_PACK_INIT ;
+        this.dataType = BlazeDragon.PACK_INIT_DATA ;
     }
 
     public BlazeSignal(boolean boolData)
@@ -66,21 +59,9 @@ public class BlazeSignal
 
     public short getBlazePackIdentifier() throws UnfittingBlazeDataException
     {
-        if (this.dataType == BlazeDragon.BLAZE_PACK_INIT )
+        if (this.dataType == BlazeDragon.PACK_INIT_DATA )
         {
             return this.blazePackIdentifier;
-        }
-        else
-        {
-            throw new UnfittingBlazeDataException();
-        }
-    }
-
-    public byte getDataPackIdentifier() throws UnfittingBlazeDataException
-    {
-        if (this.dataType == BlazeDragon.DATA_PACK_INIT )
-        {
-            return this.dataPackIdentifier;
         }
         else
         {
@@ -130,21 +111,9 @@ public class BlazeSignal
 
     public void setBlazePackIdentifier(short packInit) throws UnfittingBlazeDataException
     {
-        if(this.dataType == BlazeDragon.BLAZE_PACK_INIT )
+        if(this.dataType == BlazeDragon.PACK_INIT_DATA )
         {
             this.blazePackIdentifier = packInit;
-        }
-        else
-        {
-            throw new UnfittingBlazeDataException();
-        }
-    }
-
-    public void setDataPackIdentifier(byte packInit) throws UnfittingBlazeDataException
-    {
-        if(this.dataType == BlazeDragon.DATA_PACK_INIT )
-        {
-            this.dataPackIdentifier = packInit;
         }
         else
         {

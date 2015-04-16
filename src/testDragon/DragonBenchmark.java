@@ -36,9 +36,13 @@ public class DragonBenchmark
     {
         Scanner       scanner      = new Scanner(System.in);
         BlazeSignal[] blazeSignals = new BlazeSignal[4];
-        BlazeSignal   bs1,bs2,bs3;
+        BlazeSignal   bsType,bs1,bs2,bs3;
 
         System.out.println("BlazeSignal Input:");
+
+        System.out.print("BSType - ");
+        bsType = new BlazeSignal(scanner.nextShort());
+        scanner.nextLine();
 
         System.out.print("BS1 - ");
         bs1 = new BlazeSignal(scanner.nextLine());
@@ -49,9 +53,7 @@ public class DragonBenchmark
         System.out.print("BS3 - ");
         bs3 = new BlazeSignal(scanner.nextLine());
 
-        BlazeSignal initSignal = new BlazeSignal((short) 10);
-
-        blazeSignals[0] = initSignal;
+        blazeSignals[0] = bsType;
         blazeSignals[1] = bs1;
         blazeSignals[2] = bs2;
         blazeSignals[3] = bs3;
@@ -64,9 +66,9 @@ public class DragonBenchmark
         byte[] bytes;
         long timeBefore, timeAfter;
 
-        System.out.println("| TESTE SCHALE 1 |");
+        System.out.println("| TESTE SCHALE 1 |\n");
         System.out.println("Type: " + bs.getType() + "| Value: " + bs.getDataStr());
-        System.out.println("Umwandeln in ByteArray...");
+        System.out.println("\nUmwandeln in ByteArray...");
 
         timeBefore = System.currentTimeMillis();
         bytes = BlazeDragon.bs_2_ba(bs);
@@ -79,7 +81,7 @@ public class DragonBenchmark
         }
 
         System.out.println("\nZeit benötigt: " + (timeAfter - timeBefore) + "ms.");
-        System.out.println("Umwandeln in Blaze Signal...");
+        System.out.println("\nUmwandeln in Blaze Signal...");
 
         timeBefore = System.currentTimeMillis();
         BlazeSignal bs_new = BlazeDragon.ba_2_bs(bytes);
@@ -90,11 +92,11 @@ public class DragonBenchmark
 
         if(bs_new.getDataStr().equals(bs.getDataStr()))
         {
-            System.out.println("[ SCHALE 1 : FUNKTIONIERT ]");
+            System.out.println("\n[ SCHALE 1 : FUNKTIONIERT ]");
         }
         else
         {
-            System.out.println("[ SCHALE 1 : FEHLERHAFT ]");
+            System.out.println("\n[ SCHALE 1 : FEHLERHAFT ]");
         }
     }
 
@@ -105,16 +107,19 @@ public class DragonBenchmark
 
         byte[] bytes;
         long timeBefore, timeAfter;
+        BlazeSignal[] blazesignalsAfter;
 
-        System.out.println("[ TESTE SCHALE 2 ]");
+        System.out.println("[ TESTE SCHALE 2 ]\n");
+        System.out.print("BS0 - " + "| Type: " + blazeSignals[0].getType() + "| Value: "
+                + blazeSignals[0].getBlazePackIdentifier() + '\n');
 
         for(int i = 1; i < 4; i++)
         {
-            System.out.print("BS" + (i + 1) + " - | Type: " + blazeSignals[i].getType() + "| Value: "
+            System.out.print("BS" + (i) + " - | Type: " + blazeSignals[i].getType() + "| Value: "
                     + blazeSignals[i].getDataStr() + '\n');
         }
 
-        System.out.println("Umwandeln in ByteArray...");
+        System.out.println("\nUmwandeln in ByteArray...");
         timeBefore = System.currentTimeMillis();
         bytes = BlazeDragon.bs_array2byte_array(blazeSignals);
         timeAfter = System.currentTimeMillis();
@@ -126,7 +131,31 @@ public class DragonBenchmark
         }
 
         System.out.println("\nZeit benötigt: " + (timeAfter - timeBefore) + "ms.");
-        System.out.println("Umwandeln in BlazeSignal-Array...");
+        System.out.println("\nUmwandeln in BlazeSignal-Array...");
+
+        timeBefore        = System.currentTimeMillis();
+        blazesignalsAfter = BlazeDragon.byte_array2bs_array(bytes);
+        timeAfter         = System.currentTimeMillis();
+
+        System.out.print("BS0 - " + "| Type: " + blazesignalsAfter[0].getType() + "| Value: "
+                + blazesignalsAfter[0].getBlazePackIdentifier() + '\n');
+
+        for(int i = 1; i < 4; i++)
+        {
+            System.out.print("BS" + (i) + " - | Type: " + blazesignalsAfter[i].getType() + "| Value: "
+                    + blazesignalsAfter[i].getDataStr() + '\n');
+        }
+
+        System.out.println("Zeit benötigt: " + (timeAfter - timeBefore) + "ms.");
+
+        if(blazeSignals.equals(blazesignalsAfter))                                                                      // FALSCHES ERGEBNIS
+        {
+            System.out.println("\n[ SCHALE 1 : FUNKTIONIERT ]");
+        }
+        else
+        {
+            System.out.println("\n[ SCHALE 1 : FEHLERHAFT ]");
+        }
     }
 
     private static void testConvertingTime() throws UnfittingBlazeDataException
