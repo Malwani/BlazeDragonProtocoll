@@ -106,6 +106,7 @@ public class DragonBenchmark
         BlazeDragon.byte_array2bs_array();*/
 
         byte[] bytes;
+        int corrects = 0;
         long timeBefore, timeAfter;
         BlazeSignal[] blazesignalsAfter;
 
@@ -148,13 +149,22 @@ public class DragonBenchmark
 
         System.out.println("Zeit benötigt: " + (timeAfter - timeBefore) + "ms.");
 
-        if(blazeSignals.equals(blazesignalsAfter))                                                                      // FALSCHES ERGEBNIS
+        if(blazeSignals[0].getBlazePackIdentifier() == blazesignalsAfter[0].getBlazePackIdentifier())
+            corrects++;
+
+        for(int i = 1; i < 4; i++)
         {
-            System.out.println("\n[ SCHALE 1 : FUNKTIONIERT ]");
+            if(blazeSignals[i].getDataStr().equals(blazesignalsAfter[i].getDataStr()))
+                corrects++;
+        }
+
+        if(corrects == 4)
+        {
+            System.out.println("\n[ SCHALE 2 : FUNKTIONIERT ]");
         }
         else
         {
-            System.out.println("\n[ SCHALE 1 : FEHLERHAFT ]");
+            System.out.println("\n[ SCHALE 2 : FEHLERHAFT ]");
         }
     }
 
