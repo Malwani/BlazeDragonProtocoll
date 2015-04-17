@@ -6,5 +6,5 @@ package net.gc.blazedragon;
 
 public interface BlazeModule
 {
-    void defineSignals();
+    void defineBlazeData();
 }

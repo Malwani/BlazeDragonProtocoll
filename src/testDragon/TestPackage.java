@@ -13,7 +13,7 @@ public class TestPackage extends BlazePackage
     }
 
     @Override
-    public void defineSignals()
+    public void defineBlazeData()
     {
 
     }
