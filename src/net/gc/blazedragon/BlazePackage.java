@@ -9,9 +9,9 @@ import java.util.List;
 
 public abstract class BlazePackage implements BlazeModule
 {
-    public  short              packageID;
-    public  List<BlazeSignal>  blazeSignals;
-    private List<Byte>         blazeSignalTypeValues;
+    private  short             packageID;
+    private  List<BlazeSignal> blazeSignals;
+    private  List<Byte>        blazeSignalTypeValues;
 
     public BlazePackage(short packageID)
     {
@@ -20,16 +20,11 @@ public abstract class BlazePackage implements BlazeModule
         this.blazeSignals          = new ArrayList<BlazeSignal>();
 
         addBlazeDataType(BlazeDragon.PACK_INIT_DATA);
-        defineSignals();
-        initBlazeSignals();
+        defineBlazeData();
+        initBlazeData();
     }
 
-    public void addBlazeDataType(byte signalType)
-    {
-        this.blazeSignalTypeValues.add(signalType);
-    }
-
-    private void initBlazeSignals()
+    private void initBlazeData()
     {
         for(int i = 0; i < this.blazeSignalTypeValues.size();i++)
         {
@@ -55,5 +50,20 @@ public abstract class BlazePackage implements BlazeModule
                 }
             }
         }
+    }
+
+    public short getPackageID()
+    {
+        return  this.packageID;
+    }
+
+    public List getDataInitVals()
+    {
+        return this.blazeSignalTypeValues;
+    }
+
+    public void addBlazeDataType(byte signalType)
+    {
+        this.blazeSignalTypeValues.add(signalType);
     }
 }

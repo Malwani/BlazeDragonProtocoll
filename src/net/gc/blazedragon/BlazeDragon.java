@@ -19,17 +19,17 @@ import java.util.*;
 
 public class BlazeDragon
 {
-    public static final byte  WRONG_DATA      = -1 ;
-    public static List<Class> blazePackages;
+    public static final byte WRONG_DATA = -1 ;
+    public static ArrayList<List> packageDataInitValues;
 
     //******************************************************************************************************************//
     //                                       BLAZESIGNAL-DATATYPE INDICATORS                                            //
     //******************************************************************************************************************//
 
+    public static final byte PACK_INIT_DATA = -50;
     public static final byte BOOLEAN_DATA   = -2 ;
     public static final byte DOUBLE_DATA    = -3 ;
     public static final byte STRING_DATA    = -4 ;
-    public static final byte PACK_INIT_DATA = -50;
 
     //******************************************************************************************************************//
     //                                         BYTE-ARRAY-BINDER-VALUES                                                 //
@@ -44,12 +44,13 @@ public class BlazeDragon
 
     public BlazeDragon()
     {
-        blazePackages = new ArrayList();
+        packageDataInitValues = new ArrayList<List>();
     }
 
-    public void addPackage(Object newPackageClass)
+    public void addPackage(BlazePackage newPackageClass)
     {
-        blazePackages.add(newPackageClass.getClass());
+        packageDataInitValues.add(newPackageClass.getDataInitVals());
+
     }
 
     //******************************************************************************************************************//
