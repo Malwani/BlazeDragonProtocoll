@@ -1,5 +1,6 @@
 package testDragon;
 
+import net.gc.blazedragon.BlazeDragon;
 import net.gc.blazedragon.BlazePackage;
 
 /**
@@ -9,13 +10,14 @@ public class TestPackage extends BlazePackage
 {
     TestPackage()
     {
-        super((short)1);
+        super((short)0);
     }
 
     @Override
     public void defineBlazeData()
     {
-
+        addBlazeDataType(BlazeDragon.STRING_DATA);
+        addBlazeDataType(BlazeDragon.STRING_DATA);
     }
 
 }

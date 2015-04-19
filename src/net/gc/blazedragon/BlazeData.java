@@ -10,39 +10,47 @@ package net.gc.blazedragon;
     //                                                                                                                  //
     //******************************************************************************************************************//
 
-public class BlazeSignal
+public class BlazeData
 {
-    private byte    dataType;
+    private byte dataType;                                                                                              // Beinhaltet Blazedata-Type Indikator [Blazedragon]
 
-    private short   blazePackIdentifier;
+    //******************************************************************************************************************//
+    //                                              DATA-CONTAINER                                                      //
+    //******************************************************************************************************************//
+
+    private short   blazePackId;
     private boolean boolData;
     private double  doubleData;
     private String  strData;
 
-    public BlazeSignal()
+    //******************************************************************************************************************//
+    //                                              KONSTRUKTOREN                                                       //
+    //******************************************************************************************************************//
+
+    public BlazeData()
     {                                                                                                                   // Wird aufgerufen wenn das Signal falsch ist.
         this.dataType = BlazeDragon.WRONG_DATA;
     }
 
-    public BlazeSignal(short blazePackIdentifier)
+    public BlazeData(short blazePackId)
     {
-        this.blazePackIdentifier = blazePackIdentifier;
-        this.dataType = BlazeDragon.PACK_INIT_DATA ;
+        this.blazePackId = blazePackId;
+        this.dataType = BlazeDragon.PACKAGE_ID_DATA ;
     }
 
-    public BlazeSignal(boolean boolData)
+    public BlazeData(boolean boolData)
     {
         this.boolData = boolData;
         this.dataType = BlazeDragon.BOOLEAN_DATA;
     }
 
-    public BlazeSignal(double doubleData)
+    public BlazeData(double doubleData)
     {
         this.doubleData = doubleData;
         this.dataType = BlazeDragon.DOUBLE_DATA;
     }
 
-    public BlazeSignal(String strData)
+    public BlazeData(String strData)
     {
         this.strData = strData.trim();                                                                                  // Whitespace aus str_signal entfernen und BlazeDragon-Objekt zuteilen
         this.dataType = BlazeDragon.STRING_DATA;
@@ -59,9 +67,9 @@ public class BlazeSignal
 
     public short getBlazePackIdentifier() throws UnfittingBlazeDataException
     {
-        if (this.dataType == BlazeDragon.PACK_INIT_DATA )
+        if (this.dataType == BlazeDragon.PACKAGE_ID_DATA )
         {
-            return this.blazePackIdentifier;
+            return this.blazePackId;
         }
         else
         {
@@ -111,9 +119,9 @@ public class BlazeSignal
 
     public void setBlazePackIdentifier(short packInit) throws UnfittingBlazeDataException
     {
-        if(this.dataType == BlazeDragon.PACK_INIT_DATA )
+        if(this.dataType == BlazeDragon.PACKAGE_ID_DATA )
         {
-            this.blazePackIdentifier = packInit;
+            this.blazePackId = packInit;
         }
         else
         {

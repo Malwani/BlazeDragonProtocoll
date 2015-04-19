@@ -19,17 +19,18 @@ import java.util.*;
 
 public class BlazeDragon
 {
-    public static final byte WRONG_DATA = -1 ;
-    public static ArrayList<List> packageDataInitValues;
+    public static final byte        WRONG_DATA = -1 ;
+    private static ArrayList<Class> packageClasses;
+    private static ArrayList<List>  packageDataInitValues;
 
     //******************************************************************************************************************//
-    //                                       BLAZESIGNAL-DATATYPE INDICATORS                                            //
+    //                                          BLAZEDATA-TYPE INDICATORS                                               //
     //******************************************************************************************************************//
 
-    public static final byte PACK_INIT_DATA = -50;
-    public static final byte BOOLEAN_DATA   = -2 ;
-    public static final byte DOUBLE_DATA    = -3 ;
-    public static final byte STRING_DATA    = -4 ;
+    public static final byte PACKAGE_ID_DATA = -50;
+    public static final byte BOOLEAN_DATA    = -2 ;
+    public static final byte DOUBLE_DATA     = -3 ;
+    public static final byte STRING_DATA     = -4 ;
 
     //******************************************************************************************************************//
     //                                         BYTE-ARRAY-BINDER-VALUES                                                 //
@@ -49,29 +50,97 @@ public class BlazeDragon
 
     public void addPackage(BlazePackage newPackageClass)
     {
-        packageDataInitValues.add(newPackageClass.getDataInitVals());
-
+        packageDataInitValues.add(newPackageClass.getDataInitValues());
     }
 
     //******************************************************************************************************************//
     //                                     DE/SERIALISIERUNG SCHALE 3                                                   //
     //******************************************************************************************************************//
 
+    public BlazePackage getBlazePackage(byte[] inputBytes) throws UnfittingBlazeDataException
+    {
+        short  packId;
+
+        BlazePackage outPackage;
+        BlazeData[]  blazeDatas;
+        ByteBuffer   inputBytesBuffer = ByteBuffer.wrap(inputBytes);
+
+        //TByteArrayList      tmpBytes         = new TByteArrayList(0); - FÜR STRING KONVERTIERUNG
+
+        if(inputBytesBuffer.get() != PACKAGE_ID_DATA)                                                                   // Unbekannte/Fehlerhafte PackageID
+        {
+            throw new UnfittingBlazeDataException();
+        }
+        else
+        {
+            packId = inputBytesBuffer.getShort();                                                                       // PackageID auslesen
+            packageDataInitValues = BlazeDragon.getPackageInitBytes(packId);                                            // passende BlazeData InitValues ermitteln
+            blazeDatas = new BlazeData[packageDataInitValues.length];                                                   // BlazeData
+        }
+
+        for(int i = 1; i < packageDataInitValues.length;i++)
+        {
+            byte dataInit = packageDataInitValues[i];
+
+            if(dataInit == inputBytesBuffer.get())                                                                      // Prüfen ob DataInit-Byte der Vorliegenden Definition (packageDataInitValues) entspricht
+            {
+                switch(dataInit)
+                {
+                    case BOOLEAN_DATA:
+                    {
+                         new BlazeData(buffer.get() != 0);                                                              // Next-Byte aus dem Buffer auslesen, in bool konvertieren und dem neuen Signal übergeben
+                    }
+                    case DOUBLE_DATA:
+                    {
+                        return new BlazeData(buffer.getDouble());                                                        // Double aus dem Buffer auslesen und dem neuen Signal übergeben
+                    }
+                    case STRING_DATA:
+                    {
+                        byte[] stringBytes = new byte[byteData.length - 1];                                                     // Bytearray für Bytes des Strings erstellen
+
+                        for (int i = 0; i < stringBytes.length; i++)                                                            // Stringbytes in Bytearray kopieren
+                        {
+                            stringBytes[i] = buffer.get();                                                                      // Byte für Byte aus dem Buffer in den Array kopieren
+                        }
+
+                        return new BlazeData(Charset.forName("ISO-8859-1").decode(ByteBuffer.wrap(stringBytes)).toString());  // Bytearray in ByteBuffer schreiben und in String konvertieren
+                    }
+                    case PACKAGE_ID_DATA :
+                    {
+                        return new BlazeData(buffer.getShort());                                                              // PackInit-Short aus dem Buffer auslesen und dem neuen Signal übergeben
+                    }
+                    default:                                                                                                    // Falsches Signal empfangen
+                    {
+                        System.out.println("Wrong signal received! (type =" + signalType + ")");
+                        return new BlazeData();                                                                               // Leeres Signal wird zurückgegeben
+                    }
+                }
+            }
+            else
+                throw new UnfittingBlazeDataException();                                                                // Initialisierung Fehlerhaft
+        }
+    }
+
+    private static List<Byte> getPackageInitList(short id)
+    {
+        return BlazeDragon.packageDataInitValues.get(id);                                                               // Init Values-List
+    }
+
     //******************************************************************************************************************//
     //                                     DE/SERIALISIERUNG SCHALE 2                                                   //
     //******************************************************************************************************************//
 
-    public static BlazeSignal[] byte_array2bs_array(byte[] inputArray)
+    public static BlazeData[] byte_array2bs_array(byte[] inputArray)
     {
-        ArrayList<BlazeSignal> blazeSignals    = new ArrayList<BlazeSignal>(0);
-        TByteArrayList         tmpBytes        = new TByteArrayList(0);
-        ByteBuffer             inputByteBuffer = ByteBuffer.wrap(inputArray);
-        BlazeSignal[]          output;
+        ArrayList<BlazeData> blazeDatas      = new ArrayList<BlazeData>(0);
+        TByteArrayList       tmpBytes        = new TByteArrayList(0);
+        ByteBuffer           inputByteBuffer = ByteBuffer.wrap(inputArray);
+        BlazeData[]          output;
 
-        if(inputByteBuffer.get() != PACK_INIT_DATA)
+        if(inputByteBuffer.get() != PACKAGE_ID_DATA)
         {
-            output = new BlazeSignal[1];
-            output[0] = new BlazeSignal();                                                                              // Falsches Signal
+            output = new BlazeData[1];
+            output[0] = new BlazeData();                                                                                // Falsches Signal
             return output;
         }
         else
@@ -88,34 +157,34 @@ public class BlazeDragon
                 }
                 else if(tmp == PACKAGE_SEPERATOR)                                                                       // Wenn Byte ein Package-Seperator[Binder]
                 {
-                    blazeSignals.add(ba_2_bs(tmpBytes.toArray()));                                                      // tmp_bytes zu BlazeSignal konvertieren und der BlazeSignal-List adden
+                    blazeDatas.add(ba_2_bs(tmpBytes.toArray()));                                                        // tmp_bytes zu BlazeSignal konvertieren und der BlazeSignal-List adden
                     tmpBytes.clear();                                                                                   // tmp_bytes leeren
                     tmpBytes.trimToSize();                                                                              // und Kapazität auf Anzahl der Elemente (0) stellen
                 }
                 else                                                                                                    // Wenn Byte ein Package-End[Binder]
                 {
-                    blazeSignals.add(ba_2_bs(tmpBytes.toArray()));                                                      // tmp_bytes zu BlazeSignal konvertieren und der BlazeSignal-List adden
+                    blazeDatas.add(ba_2_bs(tmpBytes.toArray()));                                                        // tmp_bytes zu BlazeSignal konvertieren und der BlazeSignal-List adden
                     break;                                                                                              // Schleife verlassen
                 }
             }
 
-            output = new BlazeSignal[blazeSignals.size()];                                                              // OutputArray mit entsprechender Größe erstellen [BlazeSignal]
+            output = new BlazeData[blazeDatas.size()];                                                                  // OutputArray mit entsprechender Größe erstellen [BlazeSignal]
 
-            for(int i = 0; i < blazeSignals.size(); ++i)                                                                // ArrayList "BlazeSignals" durchgehen und jedes BS-Objekt dem Output-Array zufügen
+            for(int i = 0; i < blazeDatas.size(); ++i)                                                                  // ArrayList "BlazeSignals" durchgehen und jedes BS-Objekt dem Output-Array zufügen
             {
-                output[i] = blazeSignals.get(i);
+                output[i] = blazeDatas.get(i);
             }
 
             return output;
         }
     }
 
-    public static byte[] bs_array2byte_array(BlazeSignal[] bsArray) throws UnfittingBlazeDataException
+    public static byte[] bs_array2byte_array(BlazeData[] bsArray) throws UnfittingBlazeDataException
     {
         ArrayList<byte[]> byteList = new ArrayList<byte[]>(0);                                                          // ArrayList für ByteArrays erstellen
         byte[]            outArray;
 
-        if(bsArray[0].getType() != PACK_INIT_DATA )                                                                     // Falsches Signal
+        if(bsArray[0].getType() != PACKAGE_ID_DATA )                                                                    // wenn Falsches Signal
         {
             outArray = new byte[1];
             outArray[0] = WRONG_DATA;
@@ -159,7 +228,7 @@ public class BlazeDragon
     //                                         DE/SERIALISIERUNG SCHALE 1                                               //
     //******************************************************************************************************************//
 
-    public static BlazeSignal ba_2_bs(byte[] byteData)
+    public static BlazeData ba_2_bs(byte[] byteData)
     {
         ByteBuffer buffer      = ByteBuffer.wrap(byteData);                                                             // Bytearray in Bytebuffer umwandeln
         byte       signalType  = buffer.get();                                                                          // Auslesen des Typs (Erstes Byte))
@@ -168,11 +237,11 @@ public class BlazeDragon
         {
             case BOOLEAN_DATA:
             {
-                return new BlazeSignal(buffer.get() != 0);                                                              // Next-Byte aus dem Buffer auslesen, in bool konvertieren und dem neuen Signal übergeben
+                return new BlazeData(buffer.get() != 0);                                                              // Next-Byte aus dem Buffer auslesen, in bool konvertieren und dem neuen Signal übergeben
             }
             case DOUBLE_DATA:
             {
-                return new BlazeSignal(buffer.getDouble());                                                             // Double aus dem Buffer auslesen und dem neuen Signal übergeben
+                return new BlazeData(buffer.getDouble());                                                             // Double aus dem Buffer auslesen und dem neuen Signal übergeben
             }
             case STRING_DATA:
             {
@@ -183,21 +252,21 @@ public class BlazeDragon
                     stringBytes[i] = buffer.get();                                                                      // Byte für Byte aus dem Buffer in den Array kopieren
                 }
 
-                return new BlazeSignal(Charset.forName("ISO-8859-1").decode(ByteBuffer.wrap(stringBytes)).toString());  // Bytearray in ByteBuffer schreiben und in String konvertieren
+                return new BlazeData(Charset.forName("ISO-8859-1").decode(ByteBuffer.wrap(stringBytes)).toString());  // Bytearray in ByteBuffer schreiben und in String konvertieren
             }
-            case PACK_INIT_DATA :
+            case PACKAGE_ID_DATA :
             {
-                return new BlazeSignal(buffer.getShort());                                                              // PackInit-Short aus dem Buffer auslesen und dem neuen Signal übergeben
+                return new BlazeData(buffer.getShort());                                                              // PackInit-Short aus dem Buffer auslesen und dem neuen Signal übergeben
             }
             default:                                                                                                    // Falsches Signal empfangen
             {
                 System.out.println("Wrong signal received! (type =" + signalType + ")");
-                return new BlazeSignal();                                                                               // Leeres Signal wird zurückgegeben
+                return new BlazeData();                                                                               // Leeres Signal wird zurückgegeben
             }
         }
     }
 
-    public static byte[] bs_2_ba(BlazeSignal bsData) throws UnfittingBlazeDataException
+    public static byte[] bs_2_ba(BlazeData bsData) throws UnfittingBlazeDataException
     {
         byte[] byteData;                                                                                                // Wird später verschickt
         ByteBuffer buffer;
@@ -254,7 +323,7 @@ public class BlazeDragon
                 buffer.get(byteData);                                                                                   // Buffer in Bytearray schreiben
                 break;
             }
-            case BlazeDragon.PACK_INIT_DATA:
+            case BlazeDragon.PACKAGE_ID_DATA:
             {
                 byteData    = new byte[3];                                                                              // Länge 3: 1 Byte für Type, 2 Byte für IdentifierShort
                 byteData[0] = bsData.getType();
