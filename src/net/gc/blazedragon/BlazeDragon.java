@@ -92,13 +92,13 @@ public class BlazeDragon
                     }
                     case DOUBLE_DATA:
                     {
-                        return new BlazeData(buffer.getDouble());                                                        // Double aus dem Buffer auslesen und dem neuen Signal übergeben
+                        return new BlazeData(buffer.getDouble());                                                       // Double aus dem Buffer auslesen und dem neuen Signal übergeben
                     }
                     case STRING_DATA:
                     {
-                        byte[] stringBytes = new byte[byteData.length - 1];                                                     // Bytearray für Bytes des Strings erstellen
+                        byte[] stringBytes = new byte[byteData.length - 1];                                             // Bytearray für Bytes des Strings erstellen
 
-                        for (int i = 0; i < stringBytes.length; i++)                                                            // Stringbytes in Bytearray kopieren
+                        for (int i = 0; i < stringBytes.length; i++)                                                    // Stringbytes in Bytearray kopieren
                         {
                             stringBytes[i] = buffer.get();                                                                      // Byte für Byte aus dem Buffer in den Array kopieren
                         }
@@ -171,9 +171,8 @@ public class BlazeDragon
             output = new BlazeData[blazeDatas.size()];                                                                  // OutputArray mit entsprechender Größe erstellen [BlazeSignal]
 
             for(int i = 0; i < blazeDatas.size(); ++i)                                                                  // ArrayList "BlazeSignals" durchgehen und jedes BS-Objekt dem Output-Array zufügen
-            {
                 output[i] = blazeDatas.get(i);
-            }
+
 
             return output;
         }
