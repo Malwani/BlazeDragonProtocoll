@@ -1,7 +1,6 @@
 package net.gc.blazedragon;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,36 +9,29 @@ import java.util.List;
 
 public abstract class BlazePackage implements BlazeModule
 {
-    private List<BlazeData> blazeDatas;
-    private List<Byte>      blazeInitDataValues;
+    private   List<BlazeData> blazeDatas;
+    protected List<Byte>      blazeInitDataValues;
 
     public BlazePackage()
-    {
-
-    }
-
-    public BlazePackage(short packageID)
     {
         this.blazeInitDataValues = new ArrayList<Byte>();
         this.blazeDatas          = new ArrayList<BlazeData>();
 
         addBlazeDataType(BlazeDragon.PACKAGE_ID_DATA);
         defineBlazeData();
-        initBlazeData(packageID);
+        initBlazeData());
     }
 
     private void initBlazeData(short packageID)
     {
-        for(int i = 0; i < this.blazeInitDataValues.size();i++)
+        this.blazeDatas.add(new BlazeData(packageID));
+
+        for(int i = 1; i < this.blazeInitDataValues.size();i++)
         {
             byte typeVal = this.blazeInitDataValues.get(i);
 
             switch(typeVal)
             {
-                case BlazeDragon.PACKAGE_ID_DATA:
-                {
-                    this.blazeDatas.add(new BlazeData(packageID));
-                }
                 case BlazeDragon.BOOLEAN_DATA:
                 {
                     this.blazeDatas.add(new BlazeData(false));
@@ -87,10 +79,5 @@ public abstract class BlazePackage implements BlazeModule
     protected void addBlazeDataType(byte signalType)                                                                    // Verwendung in defineSignals() Methode des BlazeModuls
     {
         this.blazeInitDataValues.add(signalType);
-    }
-
-    void defineAllTypes()
-    {
-
     }
 }
