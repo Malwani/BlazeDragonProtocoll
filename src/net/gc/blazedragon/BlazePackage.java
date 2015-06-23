@@ -12,14 +12,29 @@ public abstract class BlazePackage implements BlazeModule
     private   List<BlazeData> blazeDatas;
     protected List<Byte>      blazeInitDataValues;
 
-    public BlazePackage()
+    public BlazePackage(short ID)
     {
-        this.blazeInitDataValues = new ArrayList<Byte>();
-        this.blazeDatas          = new ArrayList<BlazeData>();
+        blazeInitDataValues = new ArrayList<Byte>();
 
         addBlazeDataType(BlazeDragon.PACKAGE_ID_DATA);
         defineBlazeData();
-        initBlazeData());
+        try
+        {
+            BlazeDragon.addDataInitVals(ID, blazeInitDataValues);
+        }
+        catch(BlazeIDAlreadyExistsExcpetion ex)
+        {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public BlazePackage()
+    {
+        this.blazeDatas          = new ArrayList<BlazeData>();
+
+
+        //initBlazeData(BlazeDragon.getAmountRegClasses());
     }
 
     private void initBlazeData(short packageID)
@@ -69,11 +84,6 @@ public abstract class BlazePackage implements BlazeModule
     protected short getPackageID() throws UnfittingBlazeDataException
     {
         return this.blazeDatas.get(0).getBlazePackIdentifier();
-    }
-
-    protected List getDataInitValues()                                                                                  // Verwendet in: addPackage() im Blazedragon
-    {
-        return this.blazeInitDataValues;
     }
 
     protected void addBlazeDataType(byte signalType)                                                                    // Verwendung in defineSignals() Methode des BlazeModuls

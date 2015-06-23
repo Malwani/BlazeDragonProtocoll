@@ -46,23 +46,46 @@ public class BlazeDragon
     public BlazeDragon()
     {
         packageDataInitValues = new ArrayList<List>();
+        packageClasses        = new ArrayList<Class>();
     }
 
-    public void addPackage(BlazePackage newPackageClass)
+    public void addPackage(BlazePackage newPackageClass) throws BlazePackageAlreadyInitializedException
     {
-        packageDataInitValues.add(newPackageClass.getDataInitValues());
+        if( ! packageClasses.contains(newPackageClass.getClass()))
+        {
+            packageClasses.add(newPackageClass.getClass());
+        }
+        else
+        {
+            throw new BlazePackageAlreadyInitializedException();
+        }
     }
 
-    public static short getAmountRegClasses()
+    public static void addDataInitVals(short id, List vals) throws BlazeIDAlreadyExistsExcpetion
     {
-        return (short) packageClasses.size();
+        if( (packageDataInitValues.size() - 1) < id)
+        {
+            packageDataInitValues.add(id,vals);
+        }
+        else
+        {
+            throw new  BlazeIDAlreadyExistsExcpetion();
+        }
+    }
+
+    public static short detectNextPackageID()
+    {
+        if(packageDataInitValues.isEmpty())                                                                             // Wenn keine Größe vorhanden -> Next Index 0
+            return (short) 0;
+        else
+            return (short) (packageDataInitValues.size());                                                              // Wenn Größe vorhanden size = index
     }
 
     //******************************************************************************************************************//
     //                                     DE/SERIALISIERUNG SCHALE 3                                                   //
     //******************************************************************************************************************//
 
-    public BlazePackage getBlazePackage(byte[] inputBytes) throws UnfittingBlazeDataException
+   /* public BlazePackage getBlazePackage(byte[] inputBytes) throws UnfittingBlazeDataException
     {
         short  packId;
 
@@ -129,6 +152,7 @@ public class BlazeDragon
     {
         return BlazeDragon.packageDataInitValues.get(id);                                                               // Init Values-List
     }
+    */
 
     //******************************************************************************************************************//
     //                                     DE/SERIALISIERUNG SCHALE 2                                                   //
@@ -176,7 +200,6 @@ public class BlazeDragon
 
             for(int i = 0; i < blazeDatas.size(); ++i)                                                                  // ArrayList "BlazeSignals" durchgehen und jedes BS-Objekt dem Output-Array zufügen
                 output[i] = blazeDatas.get(i);
-
 
             return output;
         }
@@ -240,11 +263,11 @@ public class BlazeDragon
         {
             case BOOLEAN_DATA:
             {
-                return new BlazeData(buffer.get() != 0);                                                              // Next-Byte aus dem Buffer auslesen, in bool konvertieren und dem neuen Signal übergeben
+                return new BlazeData(buffer.get() != 0);                                                                // Next-Byte aus dem Buffer auslesen, in bool konvertieren und dem neuen Signal übergeben
             }
             case DOUBLE_DATA:
             {
-                return new BlazeData(buffer.getDouble());                                                             // Double aus dem Buffer auslesen und dem neuen Signal übergeben
+                return new BlazeData(buffer.getDouble());                                                               // Double aus dem Buffer auslesen und dem neuen Signal übergeben
             }
             case STRING_DATA:
             {
@@ -255,19 +278,88 @@ public class BlazeDragon
                     stringBytes[i] = buffer.get();                                                                      // Byte für Byte aus dem Buffer in den Array kopieren
                 }
 
-                return new BlazeData(Charset.forName("ISO-8859-1").decode(ByteBuffer.wrap(stringBytes)).toString());  // Bytearray in ByteBuffer schreiben und in String konvertieren
+                return new BlazeData(Charset.forName("ISO-8859-1").decode(ByteBuffer.wrap(stringBytes)).toString());    // Bytearray in ByteBuffer schreiben und in String konvertieren
             }
             case PACKAGE_ID_DATA :
             {
-                return new BlazeData(buffer.getShort());                                                              // PackInit-Short aus dem Buffer auslesen und dem neuen Signal übergeben
+                return new BlazeData(buffer.getShort());                                                                // PackInit-Short aus dem Buffer auslesen und dem neuen Signal übergeben
             }
             default:                                                                                                    // Falsches Signal empfangen
             {
                 System.out.println("Wrong signal received! (type =" + signalType + ")");
-                return new BlazeData();                                                                               // Leeres Signal wird zurückgegeben
+                return new BlazeData();                                                                                 // Leeres Signal wird zurückgegeben
             }
         }
     }
+
+    //******************************************************************************************************************//
+    //                                              SENDEN / EMPFANGEN                                                  //
+    //******************************************************************************************************************//
+
+   /* public static GCP[] receiveGCPData() throws IOException
+    {
+        int readableBytes;
+        byte[] data;
+
+        if(this.inStr == null)
+        {
+            this.inStr  = this.socket.getInputStream();
+        }
+
+        try
+        {
+            while (true)
+            {                                                                                                           // Prüfen ob ein Signal verfügbar ist
+                readableBytes = inStr.available();
+
+                if (readableBytes >= 1)
+                {                                                                                                       // Wenn Signal, dann While-Schleife verlassen
+                    break;
+                }
+
+                Thread.sleep(5);                                                                                        // sonst, warten, und nochmal
+            }
+
+            data = new byte[readableBytes];
+            inStr.read(data);
+        }
+        catch (InterruptedException e)
+        {
+            data = new byte[1];                                                                                         // Thread.sleep() hat nicht funktioniert.
+            data[0] = GCP.WrongGCP;                                                                                     // -1 im Bytearray für Fehlermeldung
+        }
+        catch (IOException e)
+        {
+            data = new byte[1];                                                                                         // Wird gethrowt, wenn ein Client disconnected
+            data[0] = GCP.WrongGCP;
+
+            System.out.println("Connection lost! (" + e.toString() + ")");
+        }
+
+        this.inStr.close();
+        this.inStr = null;
+
+        return GCP.byte_array2gcp_array(data);
+    }
+
+    public static void sendGCPData(GCP[] gcpData)
+    {
+        try
+        {
+            outStr.write(GCP.gcp_array2byte_array(gcpData));
+            outStr.flush();
+            outStr.close();
+
+
+            return true;
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+*/
 
     public static byte[] bs_2_ba(BlazeData bsData) throws UnfittingBlazeDataException
     {
@@ -349,71 +441,3 @@ public class BlazeDragon
         return byteData;
     }
 }
-
-    //******************************************************************************************************************//
-    //                                              SENDEN / EMPFANGEN                                                  //
-    //******************************************************************************************************************//
-
-   /* public static GCP[] receiveGCPData() throws IOException
-    {
-        int readableBytes;
-        byte[] data;
-
-        if(this.inStr == null)
-        {
-            this.inStr  = this.socket.getInputStream();
-        }
-
-        try
-        {
-            while (true)
-            {                                                                                                           // Prüfen ob ein Signal verfügbar ist
-                readableBytes = inStr.available();
-
-                if (readableBytes >= 1)
-                {                                                                                                       // Wenn Signal, dann While-Schleife verlassen
-                    break;
-                }
-
-                Thread.sleep(5);                                                                                        // sonst, warten, und nochmal
-            }
-
-            data = new byte[readableBytes];
-            inStr.read(data);
-        }
-        catch (InterruptedException e)
-        {
-            data = new byte[1];                                                                                         // Thread.sleep() hat nicht funktioniert.
-            data[0] = GCP.WrongGCP;                                                                                     // -1 im Bytearray für Fehlermeldung
-        }
-        catch (IOException e)
-        {
-            data = new byte[1];                                                                                         // Wird gethrowt, wenn ein Client disconnected
-            data[0] = GCP.WrongGCP;
-
-            System.out.println("Connection lost! (" + e.toString() + ")");
-        }
-
-        this.inStr.close();
-        this.inStr = null;
-
-        return GCP.byte_array2gcp_array(data);
-    }
-
-    public static void sendGCPData(GCP[] gcpData)
-    {
-        try
-        {
-            outStr.write(GCP.gcp_array2byte_array(gcpData));
-            outStr.flush();
-            outStr.close();
-
-            return true;
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-    }
-*/

@@ -7,6 +7,6 @@ public class UnfittingBlazeDataException extends Exception
 {
     UnfittingBlazeDataException()
     {
-        super("Unfitting BlazeSignal-Data! Please put the Data based of the Type or access the correct Type of Data.");
+        super("Unfitting Blaze-Data! Please put the Data based of the Type or access the correct Type of Data.");
     }
 }

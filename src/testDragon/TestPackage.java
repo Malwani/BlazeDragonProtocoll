@@ -8,7 +8,12 @@ import net.gc.blazedragon.BlazePackage;
  */
 public class TestPackage extends BlazePackage
 {
-    TestPackage()
+    TestPackage(short ID)                                                                                               // Für BlazeDragon Init
+    {
+        super(ID);
+    }
+
+    TestPackage()                                                                                                       // Normale Init (BD Init vorrausgesetzt))
     {
         super();
     }
