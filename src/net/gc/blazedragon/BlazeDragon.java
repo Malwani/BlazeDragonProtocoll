@@ -49,7 +49,7 @@ public class BlazeDragon
         packageClasses        = new ArrayList<Class>();
     }
 
-    public void addPackage(BlazePackage newPackageClass) throws BlazePackageAlreadyInitializedException
+    public void addPackage(BlazePackage newPackageClass) throws BlazePackageAlreadyIExistsException
     {
         if( ! packageClasses.contains(newPackageClass.getClass()))
         {
@@ -57,11 +57,11 @@ public class BlazeDragon
         }
         else
         {
-            throw new BlazePackageAlreadyInitializedException();
+            throw new BlazePackageAlreadyIExistsException();
         }
     }
 
-    public static void addDataInitVals(short id, List vals) throws BlazeIDAlreadyExistsExcpetion
+    public static void addDataInitVals(short id, List vals) throws BlazeIDAlreadyExistsException
     {
         if( (packageDataInitValues.size() - 1) < id)
         {
@@ -69,7 +69,7 @@ public class BlazeDragon
         }
         else
         {
-            throw new  BlazeIDAlreadyExistsExcpetion();
+            throw new BlazeIDAlreadyExistsException();
         }
     }
 

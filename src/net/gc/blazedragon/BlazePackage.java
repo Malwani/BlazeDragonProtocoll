@@ -12,7 +12,7 @@ public abstract class BlazePackage implements BlazeModule
     private   List<BlazeData> blazeDatas;
     protected List<Byte>      blazeInitDataValues;
 
-    public BlazePackage(short ID)
+    public BlazePackage(short ID)                                                                                       // Konstruktor zur Package Deklaration
     {
         blazeInitDataValues = new ArrayList<Byte>();
 
@@ -22,14 +22,14 @@ public abstract class BlazePackage implements BlazeModule
         {
             BlazeDragon.addDataInitVals(ID, blazeInitDataValues);
         }
-        catch(BlazeIDAlreadyExistsExcpetion ex)
+        catch(BlazeIDAlreadyExistsException ex)
         {
             ex.printStackTrace();
         }
 
     }
 
-    public BlazePackage()
+    public BlazePackage()                                                                                               // Konstruktor zur Initialisierung
     {
         this.blazeDatas          = new ArrayList<BlazeData>();
 

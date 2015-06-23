@@ -1,7 +1,7 @@
 package testDragon;
 
 import net.gc.blazedragon.BlazeDragon;
-import net.gc.blazedragon.BlazePackageAlreadyInitializedException;
+import net.gc.blazedragon.BlazePackageAlreadyIExistsException;
 
 /**
  * Created by Benjie on 23.06.2015.
@@ -17,13 +17,13 @@ public class TestPackageInit
         {
             addBdPackages(bd);
         }
-        catch(BlazePackageAlreadyInitializedException ex)
+        catch(BlazePackageAlreadyIExistsException ex)
         {
             ex.printStackTrace();
         }
     }
 
-    public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyInitializedException
+    public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyIExistsException
     {
         bd.addPackage(new TestPackage(BlazeDragon.detectNextPackageID()));
         bd.addPackage(new TestPackage2(BlazeDragon.detectNextPackageID()));
