@@ -29,6 +29,5 @@ public class TestPackage3 extends BlazePackage
         addBlazeDataType(BlazeDragon.STRING_DATA);
         addBlazeDataType(BlazeDragon.STRING_DATA);
     }
-
 }
 

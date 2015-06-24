@@ -49,6 +49,17 @@ public class BlazeDragon
         packageClasses        = new ArrayList<Class>();
     }
 
+    // Für Package Init
+    protected static List getPackageInitVals(short i)
+    {
+        return packageDataInitValues.get(i);
+    }
+    // Für Package Init / Serialisierung
+    protected static short detectClassID(Class PackageClass)
+    {
+        return (short) packageClasses.indexOf(PackageClass);
+    }
+
     public void addPackage(BlazePackage newPackageClass) throws BlazePackageAlreadyIExistsException
     {
         if( ! packageClasses.contains(newPackageClass.getClass()))
@@ -60,6 +71,8 @@ public class BlazeDragon
             throw new BlazePackageAlreadyIExistsException();
         }
     }
+
+    // Für Deklarations Konstruktor eines BP
 
     public static void addPackageInitVals(short id, List vals) throws BlazeIDAlreadyExistsException
     {
@@ -73,6 +86,8 @@ public class BlazeDragon
             throw new BlazeIDAlreadyExistsException();
         }
     }
+
+    // Nächste zu deklarierende Package ID ermitteln
 
     public static short detectNextPackageID()
     {

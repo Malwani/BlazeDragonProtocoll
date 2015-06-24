@@ -2,6 +2,7 @@ package testDragon;
 
 import net.gc.blazedragon.BlazeDragon;
 import net.gc.blazedragon.BlazePackageAlreadyIExistsException;
+import net.gc.blazedragon.UnfittingBlazeDataException;
 
 /**
  * Created by Benjie on 23.06.2015.
@@ -21,6 +22,23 @@ public class TestPackageInit
         {
             ex.printStackTrace();
         }
+
+        TestPackage test = new TestPackage();
+
+        test.setLoggedIn(true);
+        test.setPass("mario123");
+        test.setUsername("espanhola");
+
+        try
+        {
+            System.out.println(test.getLoggedIn());
+            System.out.println(test.getPass());
+            System.out.println(test.getUsername());
+        }catch(UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
+
     }
 
     public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyIExistsException

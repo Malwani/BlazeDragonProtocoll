@@ -27,7 +27,7 @@ public class TestPackage2 extends BlazePackage
         addBlazeDataType(BlazeDragon.STRING_DATA);
         addBlazeDataType(BlazeDragon.STRING_DATA);
         addBlazeDataType(BlazeDragon.STRING_DATA);
-        addBlazeDataType(BlazeDragon.STRING_DATA);
+
     }
 
 }
