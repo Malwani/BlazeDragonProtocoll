@@ -29,10 +29,9 @@ public abstract class BlazePackage implements BlazeModule
 
     }
 
-    public BlazePackage()                                                                                               // Konstruktor zur Initialisierung
+    public BlazePackage()                                                                                               // Konstruktor zur Package-Initialisierung
     {
         this.blazeDatas          = new ArrayList<BlazeData>();
-
 
         //initBlazeData(BlazeDragon.getAmountRegClasses());
     }
