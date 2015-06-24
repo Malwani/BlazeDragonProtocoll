@@ -61,10 +61,11 @@ public class BlazeDragon
         }
     }
 
-    public static void addDataInitVals(short id, List vals) throws BlazeIDAlreadyExistsException
+    public static void addPackageInitVals(short id, List vals) throws BlazeIDAlreadyExistsException
     {
         if( (packageDataInitValues.size() - 1) < id)
         {
+            System.out.println(packageDataInitValues.size());
             packageDataInitValues.add(id,vals);
         }
         else

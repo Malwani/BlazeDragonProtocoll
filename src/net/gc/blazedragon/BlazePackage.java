@@ -18,9 +18,10 @@ public abstract class BlazePackage implements BlazeModule
 
         addBlazeDataType(BlazeDragon.PACKAGE_ID_DATA);
         defineBlazeData();
+
         try
         {
-            BlazeDragon.addDataInitVals(ID, blazeInitDataValues);
+            BlazeDragon.addPackageInitVals(ID, blazeInitDataValues);
         }
         catch(BlazeIDAlreadyExistsException ex)
         {

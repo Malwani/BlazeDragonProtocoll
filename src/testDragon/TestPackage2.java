@@ -23,6 +23,11 @@ public class TestPackage2 extends BlazePackage
     {
         addBlazeDataType(BlazeDragon.BOOLEAN_DATA);
         addBlazeDataType(BlazeDragon.STRING_DATA);
+        addBlazeDataType(BlazeDragon.STRING_DATA);
+        addBlazeDataType(BlazeDragon.STRING_DATA);
+        addBlazeDataType(BlazeDragon.STRING_DATA);
+        addBlazeDataType(BlazeDragon.STRING_DATA);
+        addBlazeDataType(BlazeDragon.STRING_DATA);
     }
 
 }
