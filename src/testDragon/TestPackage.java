@@ -1,6 +1,5 @@
 package testDragon;
 
-import net.gc.blazedragon.BlazeData;
 import net.gc.blazedragon.BlazeDragon;
 import net.gc.blazedragon.BlazePackage;
 import net.gc.blazedragon.UnfittingBlazeDataException;
@@ -33,17 +32,39 @@ public class TestPackage extends BlazePackage
     void setLoggedIn(boolean bool)
     {
         // Indexstart bei 1 da 0 mit PAckInit belegt ist
-        this.setData(1, new BlazeData(bool));
+        try
+        {
+            this.setData(1, BlazeDragon.BOOLEAN_DATA, bool);
+        }
+        catch (UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
+
     }
 
     void setUsername(String uname)
     {
-        this.setData(2, new BlazeData(uname));
+        try
+        {
+            this.setData(2, BlazeDragon.STRING_DATA, uname);
+        }
+        catch (UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     void setPass(String pass)
     {
-        this.setData(3, new BlazeData(pass));
+        try
+        {
+            this.setData(3, BlazeDragon.STRING_DATA, pass);
+        }
+        catch (UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     boolean getLoggedIn() throws UnfittingBlazeDataException

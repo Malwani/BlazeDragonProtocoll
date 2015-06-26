@@ -1,5 +1,7 @@
 package net.gc.blazedragon;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,39 +75,36 @@ public abstract class BlazePackage implements BlazeModule
         }
     }
 
-    protected BlazeData getData(int index)                                                                              // Für Getter des Endo-Packages
+    protected BlazeData getData(int index)                                                                              // Fï¿½r Getter des Endo-Packages
     {
         return blazeDatas.get(index);
     }
 
-    protected void setData(int i, BlazeData bData)                                                                      // Für Setter des Endo-Packages
+    protected void setData(int index, byte dataType, Object data) throws UnfittingBlazeDataException                    // Fï¿½r Setter des Endo-Packages dataType Ã¼ber Blazedragon
     {
-        try
+        switch(dataType)
         {
-            switch(blazeDatas.get(i).getType())
+            case BlazeDragon.BOOLEAN_DATA:
             {
-                case BlazeDragon.BOOLEAN_DATA:
-                {
-                    blazeDatas.get(i).setBoolean(bData.getDataBoolean());
-                }
-                case BlazeDragon.DOUBLE_DATA:
-                {
-                    blazeDatas.get(i).setDouble(bData.getDataDouble());
-                }
-                case BlazeDragon.STRING_DATA:
-                {
-                    blazeDatas.get(i).setStr(bData.getDataStr());
-                }
-                case BlazeDragon.PACKAGE_ID_DATA:
-                {
-                    blazeDatas.get(i).setBlazePackIdentifier(bData.getBlazePackIdentifier());
-                }
+                this.blazeDatas.get(index).setBoolean((Boolean) data);
+                break;
             }
-        }catch(UnfittingBlazeDataException ex)
-        {
-            ex.printStackTrace();
+            case BlazeDragon.DOUBLE_DATA:
+            {
+                this.blazeDatas.get(index).setDouble((Double) data);
+                break;
+            }
+            case BlazeDragon.STRING_DATA:
+            {
+                this.blazeDatas.get(index).setStr((String) data);
+                break;
+            }
+            case BlazeDragon.PACKAGE_ID_DATA:
+            {
+                this.blazeDatas.get(index).setBlazePackIdentifier((Short) data);
+                break;
+            }
         }
-
     }
 
     public BlazeData[] getBlazeDatas()
