@@ -1,7 +1,5 @@
 package net.gc.blazedragon;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +7,27 @@ import java.util.List;
  * Created by Malwani on 28.02.2015.
  */
 
+    //******************************************************************************************************************//
+    //                                                                                                                  //
+    //                                       PACKAGE-CLASS FOR THE DRAGON                                               //
+    //                                                                                                                  //
+    //******************************************************************************************************************//
+
 public abstract class BlazePackage implements BlazeModule
 {
     private List<BlazeData> blazeDatas;
     private List<Byte>      blazeInitDataValues;
+
+    //******************************************************************************************************************//
+    //                                              KONSTRUKTOREN                                                       //
+    //******************************************************************************************************************//
+
+    public BlazePackage()                                                                                               // Konstruktor zur Package-Initialisierung
+    {
+        this.blazeDatas = new ArrayList<BlazeData>();
+
+        initBlazeData();
+    }
 
     public BlazePackage(short ID)                                                                                       // Konstruktor zur Package Deklaration
     {
@@ -32,12 +47,9 @@ public abstract class BlazePackage implements BlazeModule
 
     }
 
-    public BlazePackage()                                                                                               // Konstruktor zur Package-Initialisierung
-    {
-        this.blazeDatas = new ArrayList<BlazeData>();
-
-        initBlazeData();
-    }
+    //******************************************************************************************************************//
+    //                                              METHODEN                                                            //
+    //******************************************************************************************************************//
 
     private void initBlazeData()
     {
@@ -75,11 +87,6 @@ public abstract class BlazePackage implements BlazeModule
         }
     }
 
-    protected BlazeData getData(int index)                                                                              // F�r Getter des Endo-Packages
-    {
-        return blazeDatas.get(index);
-    }
-
     protected void setData(int index, byte dataType, Object data) throws UnfittingBlazeDataException                    // F�r Setter des Endo-Packages dataType über Blazedragon
     {
         switch(dataType)
@@ -107,21 +114,21 @@ public abstract class BlazePackage implements BlazeModule
         }
     }
 
-    public BlazeData[] getBlazeDatas()
+    protected void addBlazeDataType(byte signalType)                                                                    // Verwendung in defineSignals() Methode des BlazeModuls
+    {
+        this.blazeInitDataValues.add(signalType);
+    }
+
+    protected BlazeData getData(int index)                                                                              // Für Getter des Blaze-Packages
+    {
+        return blazeDatas.get(index);
+    }
+
+    public BlazeData[] getBlazeDatas()                                                                                  // Für Serialisierung
     {
         BlazeData[] outArray = new BlazeData[this.blazeDatas.size()];
         outArray = this.blazeDatas.toArray(outArray);
 
         return outArray;
-    }
-
-    protected short getPackageID() throws UnfittingBlazeDataException
-    {
-        return this.blazeDatas.get(0).getBlazePackIdentifier();
-    }
-
-    protected void addBlazeDataType(byte signalType)                                                                    // Verwendung in defineSignals() Methode des BlazeModuls
-    {
-        this.blazeInitDataValues.add(signalType);
     }
 }
