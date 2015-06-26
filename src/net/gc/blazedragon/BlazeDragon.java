@@ -40,7 +40,7 @@ public class BlazeDragon
     public  static final byte PACKAGE_END       = -128;
 
     //******************************************************************************************************************//
-    //                                         SOME METHODES                                                            //
+    //                                               KONSTRUKTOR                                                        //
     //******************************************************************************************************************//
 
     public BlazeDragon()
@@ -49,18 +49,21 @@ public class BlazeDragon
         packageClasses        = new ArrayList<Class>();
     }
 
-    // Für Package Init
-    protected static List getPackageInitVals(short i)
+    //******************************************************************************************************************//
+    //                                        PACKAGE-INIT-METHODEN                                                     //
+    //******************************************************************************************************************//
+
+    protected static List getPackageInitVals(short i)                                                                   // Für Package Init
     {
         return packageDataInitValues.get(i);
     }
-    // Für Package Init / Serialisierung
-    protected static short detectClassID(Class PackageClass)
+
+    protected static short detectClassID(Class PackageClass)                                                            // Für Package Init
     {
         return (short) packageClasses.indexOf(PackageClass);
     }
 
-    public void addPackage(BlazePackage newPackageClass) throws BlazePackageAlreadyIExistsException
+    public void addPackage(BlazePackage newPackageClass) throws BlazePackageAlreadyExistsException                     // Packagedeklaration
     {
         if( ! packageClasses.contains(newPackageClass.getClass()))
         {
@@ -68,13 +71,11 @@ public class BlazeDragon
         }
         else
         {
-            throw new BlazePackageAlreadyIExistsException();
+            throw new BlazePackageAlreadyExistsException();
         }
     }
 
-    // Für Deklarations Konstruktor eines BP
-
-    public static void addPackageInitVals(short id, List vals) throws BlazeIDAlreadyExistsException
+    public static void addPackageInitVals(short id, List vals) throws BlazeIDAlreadyExistsException                     // Für Deklarations-Konstruktor eines BlazePackages
     {
         if( (packageDataInitValues.size() - 1) < id)
         {
@@ -87,9 +88,7 @@ public class BlazeDragon
         }
     }
 
-    // Nächste zu deklarierende Package ID ermitteln
-
-    public static short detectNextPackageID()
+    public static short detectNextPackageID()                                                                           // Nächste zu deklarierende Package ID ermitteln
     {
         if(packageDataInitValues.isEmpty())                                                                             // Wenn keine Größe vorhanden -> Next Index 0
             return (short) 0;
@@ -98,7 +97,7 @@ public class BlazeDragon
     }
 
     //******************************************************************************************************************//
-    //                                     DE/SERIALISIERUNG SCHALE 3                                                   //
+    //                                             SERIALISIERUNG                                                       //
     //******************************************************************************************************************//
 
    /* public BlazePackage getBlazePackage(byte[] inputBytes) throws UnfittingBlazeDataException
@@ -162,13 +161,7 @@ public class BlazeDragon
             else
                 throw new UnfittingBlazeDataException();                                                                // Initialisierung Fehlerhaft
         }
-    }
-
-    public static List<Byte> getPackageInitList(short id)
-    {
-        return BlazeDragon.packageDataInitValues.get(id);                                                               // Init Values-List
-    }
-    */
+    }*/
 
     //******************************************************************************************************************//
     //                                     DE/SERIALISIERUNG SCHALE 2                                                   //
@@ -307,75 +300,6 @@ public class BlazeDragon
             }
         }
     }
-
-    //******************************************************************************************************************//
-    //                                              SENDEN / EMPFANGEN                                                  //
-    //******************************************************************************************************************//
-
-   /* public static GCP[] receiveGCPData() throws IOException
-    {
-        int readableBytes;
-        byte[] data;
-
-        if(this.inStr == null)
-        {
-            this.inStr  = this.socket.getInputStream();
-        }
-
-        try
-        {
-            while (true)
-            {                                                                                                           // Prüfen ob ein Signal verfügbar ist
-                readableBytes = inStr.available();
-
-                if (readableBytes >= 1)
-                {                                                                                                       // Wenn Signal, dann While-Schleife verlassen
-                    break;
-                }
-
-                Thread.sleep(5);                                                                                        // sonst, warten, und nochmal
-            }
-
-            data = new byte[readableBytes];
-            inStr.read(data);
-        }
-        catch (InterruptedException e)
-        {
-            data = new byte[1];                                                                                         // Thread.sleep() hat nicht funktioniert.
-            data[0] = GCP.WrongGCP;                                                                                     // -1 im Bytearray für Fehlermeldung
-        }
-        catch (IOException e)
-        {
-            data = new byte[1];                                                                                         // Wird gethrowt, wenn ein Client disconnected
-            data[0] = GCP.WrongGCP;
-
-            System.out.println("Connection lost! (" + e.toString() + ")");
-        }
-
-        this.inStr.close();
-        this.inStr = null;
-
-        return GCP.byte_array2gcp_array(data);
-    }
-
-    public static void sendGCPData(GCP[] gcpData)
-    {
-        try
-        {
-            outStr.write(GCP.gcp_array2byte_array(gcpData));
-            outStr.flush();
-            outStr.close();
-
-
-            return true;
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-    }
-*/
 
     public static byte[] bs_2_ba(BlazeData bsData) throws UnfittingBlazeDataException
     {

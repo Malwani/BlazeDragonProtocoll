@@ -86,7 +86,7 @@ public abstract class BlazePackage implements BlazeModule
             }
         }
     }
-
+    
     protected void setData(int index, byte dataType, Object data) throws UnfittingBlazeDataException                    // F�r Setter des Endo-Packages dataType über Blazedragon
     {
         switch(dataType)
@@ -119,7 +119,7 @@ public abstract class BlazePackage implements BlazeModule
         this.blazeInitDataValues.add(signalType);
     }
 
-    protected BlazeData getData(int index)                                                                              // Für Getter des Blaze-Packages
+    protected BlazeData getBlazeData(int index)                                                                              // Für Getter des Blaze-Packages
     {
         return blazeDatas.get(index);
     }

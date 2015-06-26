@@ -1,7 +1,7 @@
 package testDragon;
 
 import net.gc.blazedragon.BlazeDragon;
-import net.gc.blazedragon.BlazePackageAlreadyIExistsException;
+import net.gc.blazedragon.BlazePackageAlreadyExistsException;
 import net.gc.blazedragon.UnfittingBlazeDataException;
 
 /**
@@ -18,7 +18,7 @@ public class TestPackageInit
         {
             addBdPackages(bd);
         }
-        catch(BlazePackageAlreadyIExistsException ex)
+        catch(BlazePackageAlreadyExistsException ex)
         {
             ex.printStackTrace();
         }
@@ -28,12 +28,14 @@ public class TestPackageInit
         test.setLoggedIn(true);
         test.setPass("mario123");
         test.setUsername("espanhola");
+        test.setDouble(4578.5);
 
         try
         {
             System.out.println(test.getLoggedIn());
             System.out.println(test.getPass());
             System.out.println(test.getUsername());
+            System.out.println(test.getDouble());
         }catch(UnfittingBlazeDataException ex)
         {
             ex.printStackTrace();
@@ -41,7 +43,7 @@ public class TestPackageInit
 
     }
 
-    public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyIExistsException
+    public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyExistsException
     {
         bd.addPackage(new TestPackage(BlazeDragon.detectNextPackageID()));
     }

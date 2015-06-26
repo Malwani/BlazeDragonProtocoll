@@ -25,6 +25,7 @@ public class TestPackage extends BlazePackage
         addBlazeDataType(BlazeDragon.BOOLEAN_DATA);                                                                     // Daten Hirachie
         addBlazeDataType(BlazeDragon.STRING_DATA);
         addBlazeDataType(BlazeDragon.STRING_DATA);
+        addBlazeDataType(BlazeDragon.DOUBLE_DATA);
     }
 
     // Sample Getter / Setter
@@ -67,19 +68,36 @@ public class TestPackage extends BlazePackage
         }
     }
 
+    void setDouble(double d)
+    {
+        try
+        {
+            this.setData(4, BlazeDragon.DOUBLE_DATA, d);
+        }
+        catch (UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
     boolean getLoggedIn() throws UnfittingBlazeDataException
     {
-        return this.getData(1).getDataBoolean();
+        return this.getBlazeData(1).getDataBoolean();
     }
 
     String getUsername() throws UnfittingBlazeDataException
     {
-        return this.getData(2).getDataStr();
+        return this.getBlazeData(2).getDataStr();
     }
 
     String getPass() throws UnfittingBlazeDataException
     {
-        return this.getData(3).getDataStr();
+        return this.getBlazeData(3).getDataStr();
+    }
+
+    double getDouble() throws UnfittingBlazeDataException
+    {
+        return this.getBlazeData(4).getDataDouble();
     }
 }
 
