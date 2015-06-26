@@ -44,8 +44,5 @@ public class TestPackageInit
     public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyIExistsException
     {
         bd.addPackage(new TestPackage(BlazeDragon.detectNextPackageID()));
-        /*bd.addPackage(new TestPackage2(BlazeDragon.detectNextPackageID()));
-        bd.addPackage(new TestPackage3(BlazeDragon.detectNextPackageID()));
-        bd.addPackage(new TestPackage4(BlazeDragon.detectNextPackageID()));*/
     }
 }

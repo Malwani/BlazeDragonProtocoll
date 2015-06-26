@@ -22,7 +22,7 @@ public class TestPackage extends BlazePackage
     @Override
     public void defineBlazeData()
     {
-        addBlazeDataType(BlazeDragon.BOOLEAN_DATA);
+        addBlazeDataType(BlazeDragon.BOOLEAN_DATA);                                                                     // Daten Hirachie
         addBlazeDataType(BlazeDragon.STRING_DATA);
         addBlazeDataType(BlazeDragon.STRING_DATA);
     }
@@ -72,12 +72,12 @@ public class TestPackage extends BlazePackage
         return this.getData(1).getDataBoolean();
     }
 
-    String getPass() throws UnfittingBlazeDataException
+    String getUsername() throws UnfittingBlazeDataException
     {
         return this.getData(2).getDataStr();
     }
 
-    String getUsername() throws UnfittingBlazeDataException
+    String getPass() throws UnfittingBlazeDataException
     {
         return this.getData(3).getDataStr();
     }
