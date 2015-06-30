@@ -23,7 +23,7 @@ public class TestPackageInit
             ex.printStackTrace();
         }
 
-        TestPackage test = new TestPackage();
+        TestPackage test = new TestPackage(true);
 
         test.setLoggedIn(true);
         test.setPass("mario123");
@@ -37,6 +37,17 @@ public class TestPackageInit
             System.out.println(test.getUsername());
             System.out.println(test.getDouble());
         }catch(UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
+
+
+
+        TestPackage test2 = new TestPackage(false);
+        try
+        {
+            test2.setBlazeDatas(BlazeDragon.getBlazeDatas(BlazeDragon.getBytes(test.getBlazeDatas())));
+        }catch (UnfittingBlazeDataException ex)
         {
             ex.printStackTrace();
         }

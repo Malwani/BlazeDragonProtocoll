@@ -29,7 +29,7 @@ public class DragonBenchmark
 
 
 
-        TestPackage tp = new TestPackage();
+        TestPackage tp = new TestPackage(true);
 
         tp.setLoggedIn(true);
         tp.setPass("mario123");

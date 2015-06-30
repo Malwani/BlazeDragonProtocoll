@@ -27,11 +27,6 @@ public class BlazeData
     //                                              KONSTRUKTOREN                                                       //
     //******************************************************************************************************************//
 
-    public BlazeData()
-    {                                                                                                                   // Wird aufgerufen wenn das Signal falsch ist.
-        this.dataType = BlazeDragon.WRONG_DATA;
-    }
-
     public BlazeData(short blazePackId)
     {
         this.blazePackId = blazePackId;

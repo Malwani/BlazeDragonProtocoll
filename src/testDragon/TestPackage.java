@@ -14,9 +14,9 @@ public class TestPackage extends BlazePackage
         super(ID);
     }
 
-    TestPackage()                                                                                                       // Normale Init (BD Init vorrausgesetzt))
+    TestPackage(boolean init)                                                                                                       // Normale Init (BD Init vorrausgesetzt))
     {
-        super(true);
+        super(init);
     }
 
     @Override
@@ -99,4 +99,3 @@ public class TestPackage extends BlazePackage
         return this.getBlazeData(4).getDataDouble();
     }
 }
-

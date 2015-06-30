@@ -19,7 +19,7 @@ public abstract class BlazePackage implements BlazeModule
     //******************************************************************************************************************//
 
     public BlazePackage(boolean init)                                                                                   // Konstruktor zur Package-Initialisierung
-    {
+    {                                                                                                                   // Parameter -> true = mit Init | false = ohne Init(zur befüllung aus Bytes)
         if(init)
         {
             int size = BlazeDragon.getPackageInitBytes(BlazeDragon.detectClassID(this.getClass())).length;
@@ -39,11 +39,6 @@ public abstract class BlazePackage implements BlazeModule
         {
             ex.printStackTrace();
         }
-    }
-
-    public BlazePackage()
-    {
-
     }
 
     //******************************************************************************************************************//
