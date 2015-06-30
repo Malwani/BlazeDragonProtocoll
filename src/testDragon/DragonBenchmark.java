@@ -6,7 +6,6 @@ package testDragon;
 
 import net.gc.blazedragon.*;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class DragonBenchmark
@@ -15,13 +14,34 @@ public class DragonBenchmark
     {
         System.out.println("| BLAZE BENCHMARK |");
         System.out.println("_____________________________");
-        BlazeData[] blazeDatas = readInData();
+       // BlazeData[] blazeDatas = readInData();
+
+        BlazeData[] blazeDatas;
+        BlazeDragon bd = new BlazeDragon();
 
         try
         {
-            System.out.println("_____________________________");
+            addBdPackages(bd);
+        }catch(BlazePackageAlreadyExistsException ex)
+        {
+            ex.printStackTrace();
+        }
+
+
+
+        TestPackage tp = new TestPackage();
+
+        tp.setLoggedIn(true);
+        tp.setPass("mario123");
+        tp.setUsername("espanhola");
+        tp.setDouble(4578.5);
+        blazeDatas = tp.getBlazeDatas();
+
+        try
+        {
+           /* System.out.println("_____________________________");
             testShellOne(blazeDatas[1]);
-            System.out.println("_____________________________");
+            System.out.println("_____________________________");*/
             testShellTwo(blazeDatas);
             System.out.println("_____________________________");
         }
@@ -34,15 +54,17 @@ public class DragonBenchmark
 
     private static BlazeData[] readInData()
     {
-        Scanner       scanner      = new Scanner(System.in);
-        BlazeData[] blazeDatas = new BlazeData[4];
+        Scanner       scanner  = new Scanner(System.in);
+        BlazeData[] blazeDatas = new BlazeData[5];
         BlazeData bsType,bs1,bs2,bs3;
 
         System.out.println("BlazeSignal Input:");
 
-        System.out.print("BSType - ");
+
+        bsType = new BlazeData((short) 0);
+        /*System.out.print("BSType - ");
         bsType = new BlazeData(scanner.nextShort());
-        scanner.nextLine();
+        scanner.nextLine();*/
 
         System.out.print("BS1 - ");
         bs1 = new BlazeData(scanner.nextLine());
@@ -61,44 +83,6 @@ public class DragonBenchmark
         return blazeDatas;
     }
 
-    private static void testShellOne(BlazeData bs) throws UnfittingBlazeDataException
-    {
-        byte[] bytes;
-        long timeBefore, timeAfter;
-
-        System.out.println("| TESTE SCHALE 1 |\n");
-        System.out.println("Type: " + bs.getType() + "| Value: " + bs.getDataStr());
-        System.out.println("\nUmwandeln in ByteArray...");
-
-        timeBefore = System.currentTimeMillis();
-        bytes = BlazeDragon.bs_2_ba(bs);
-        timeAfter = System.currentTimeMillis();
-
-        System.out.print("Bytes: |");
-        for (byte singleByte : bytes)
-        {
-            System.out.print(Integer.toHexString(singleByte) + "|");
-        }
-
-        System.out.println("\nZeit benötigt: " + (timeAfter - timeBefore) + "ms.");
-        System.out.println("\nUmwandeln in Blaze Signal...");
-
-        timeBefore = System.currentTimeMillis();
-        BlazeData bs_new = BlazeDragon.ba_2_bs(bytes);
-        timeAfter = System.currentTimeMillis();
-
-        System.out.println("Type: " + bs_new.getType() + "| Value: " + bs_new.getDataStr());
-        System.out.println("Zeit benötigt: " + (timeAfter - timeBefore) + "ms.");
-
-        if(bs_new.getDataStr().equals(bs.getDataStr()))
-        {
-            System.out.println("\n[ SCHALE 1 : FUNKTIONIERT ]");
-        }
-        else
-        {
-            System.out.println("\n[ SCHALE 1 : FEHLERHAFT ]");
-        }
-    }
 
     private static void testShellTwo(BlazeData[] blazeDatas) throws UnfittingBlazeDataException
     {
@@ -109,20 +93,33 @@ public class DragonBenchmark
         int corrects = 0;
         long timeBefore, timeAfter;
         BlazeData[] blazesignalsAfter;
+        BlazeDragon bd = new BlazeDragon();
+
+        try
+        {
+            addBdPackages(bd);
+        }
+        catch(BlazePackageAlreadyExistsException ex)
+        {
+            ex.printStackTrace();
+        }
 
         System.out.println("[ TESTE SCHALE 2 ]\n");
         System.out.print("BS0 - " + "| Type: " + blazeDatas[0].getType() + "| Value: "
                 + blazeDatas[0].getBlazePackIdentifier() + '\n');
 
-        for(int i = 1; i < 4; i++)
-        {
-            System.out.print("BS" + (i) + " - | Type: " + blazeDatas[i].getType() + "| Value: "
-                    + blazeDatas[i].getDataStr() + '\n');
-        }
+        System.out.print("BS1  - | Type: " + blazeDatas[1].getType() + "| Value: "
+                + blazeDatas[1].getDataBoolean() + '\n');
+        System.out.print("BS2  - | Type: " + blazeDatas[2].getType() + "| Value: "
+                + blazeDatas[2].getDataStr() + '\n');
+        System.out.print("BS3 - | Type: " + blazeDatas[3].getType() + "| Value: "
+                + blazeDatas[3].getDataStr() + '\n');
+        System.out.print("BS4 - | Type: " + blazeDatas[4].getType() + "| Value:"
+                + blazeDatas[4].getDataDouble() + '\n');
 
         System.out.println("\nUmwandeln in ByteArray...");
         timeBefore = System.currentTimeMillis();
-        bytes = BlazeDragon.bs_array2byte_array(blazeDatas);
+        bytes = BlazeDragon.getBytes(blazeDatas);
         timeAfter = System.currentTimeMillis();
 
         System.out.print("Bytes: |");
@@ -135,40 +132,34 @@ public class DragonBenchmark
         System.out.println("\nUmwandeln in BlazeSignal-Array...");
 
         timeBefore        = System.currentTimeMillis();
-        blazesignalsAfter = BlazeDragon.byte_array2bs_array(bytes);
+        blazesignalsAfter = BlazeDragon.getBlazeDatas(bytes);
         timeAfter         = System.currentTimeMillis();
 
         System.out.print("BS0 - " + "| Type: " + blazesignalsAfter[0].getType() + "| Value: "
                 + blazesignalsAfter[0].getBlazePackIdentifier() + '\n');
 
-        for(int i = 1; i < 4; i++)
-        {
-            System.out.print("BS" + (i) + " - | Type: " + blazesignalsAfter[i].getType() + "| Value: "
-                    + blazesignalsAfter[i].getDataStr() + '\n');
-        }
+        System.out.print("BS1  - | Type: " + blazeDatas[1].getType() + "| Value: "
+                + blazeDatas[1].getDataBoolean() + '\n');
+        System.out.print("BS2  - | Type: " + blazeDatas[2].getType() + "| Value: "
+                + blazeDatas[2].getDataStr() + '\n');
+        System.out.print("BS3 - | Type: " + blazeDatas[3].getType() + "| Value: "
+                + blazeDatas[3].getDataStr() + '\n');
+        System.out.print("BS4 - | Type: " + blazeDatas[4].getType() + "| Value:"
+                + blazeDatas[4].getDataDouble() + '\n');
 
         System.out.println("Zeit benötigt: " + (timeAfter - timeBefore) + "ms.");
 
         if(blazeDatas[0].getBlazePackIdentifier() == blazesignalsAfter[0].getBlazePackIdentifier())
             corrects++;
 
-        for(int i = 1; i < 4; i++)
-        {
-            if(blazeDatas[i].getDataStr().equals(blazesignalsAfter[i].getDataStr()))
-                corrects++;
-        }
-
-        if(corrects == 4)
-        {
-            System.out.println("\n[ SCHALE 2 : FUNKTIONIERT ]");
-        }
-        else
-        {
-            System.out.println("\n[ SCHALE 2 : FEHLERHAFT ]");
-        }
     }
 
-    private static void testConvertingTime() throws UnfittingBlazeDataException
+    public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyExistsException
+    {
+        bd.addPackage(new TestPackage(BlazeDragon.detectNextPackageID()));
+    }
+
+    /*private static void testConvertingTime() throws UnfittingBlazeDataException
     {
         byte[] bytes;
         int times = 100000;
@@ -180,8 +171,8 @@ public class DragonBenchmark
 
         for(int i = 0; i <= times; i++)
         {
-            bytes = BlazeDragon.bs_2_ba(bs);
-            bs = BlazeDragon.ba_2_bs(bytes);
+            bytes = BlazeDragon.bd_2ba(bs);
+            bs = BlazeDragon.ba_2_bd(bytes);
         }
 
         timeAfter = System.currentTimeMillis();
@@ -200,5 +191,5 @@ public class DragonBenchmark
         randomNum = minimum - r;
 
         return randomNum;
-    }
+    }*/
 }

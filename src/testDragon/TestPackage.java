@@ -16,16 +16,15 @@ public class TestPackage extends BlazePackage
 
     TestPackage()                                                                                                       // Normale Init (BD Init vorrausgesetzt))
     {
-        super();
+        super(true);
     }
 
     @Override
-    public void defineBlazeData()
+    public Byte[] defineBlazeData()
     {
-        addBlazeDataType(BlazeDragon.BOOLEAN_DATA);                                                                     // Daten Hirachie
-        addBlazeDataType(BlazeDragon.STRING_DATA);
-        addBlazeDataType(BlazeDragon.STRING_DATA);
-        addBlazeDataType(BlazeDragon.DOUBLE_DATA);
+        Byte[] initBytes = {BlazeDragon.BOOLEAN_DATA, BlazeDragon.STRING_DATA, BlazeDragon.STRING_DATA, BlazeDragon.DOUBLE_DATA};
+
+        return initBytes;
     }
 
     // Sample Getter / Setter

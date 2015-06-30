@@ -1,8 +1,5 @@
 package net.gc.blazedragon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Malwani on 28.02.2015.
  */
@@ -15,35 +12,37 @@ import java.util.List;
 
 public abstract class BlazePackage implements BlazeModule
 {
-    private List<BlazeData> blazeDatas;
-    private List<Byte>      blazeInitDataValues;
+    private BlazeData[] blazeDatas = null;
 
     //******************************************************************************************************************//
     //                                              KONSTRUKTOREN                                                       //
     //******************************************************************************************************************//
 
-    public BlazePackage()                                                                                               // Konstruktor zur Package-Initialisierung
+    public BlazePackage(boolean init)                                                                                   // Konstruktor zur Package-Initialisierung
     {
-        this.blazeDatas = new ArrayList<BlazeData>();
+        if(init)
+        {
+            int size = BlazeDragon.getPackageInitBytes(BlazeDragon.detectClassID(this.getClass())).length;
 
-        initBlazeData();
+            this.blazeDatas = new BlazeData[size];
+            initBlazeData();
+        }
     }
 
-    public BlazePackage(short ID)                                                                                       // Konstruktor zur Package Deklaration
+    public BlazePackage(short id)                                                                                       // Konstruktor zur Package Deklaration
     {
-        blazeInitDataValues = new ArrayList<Byte>();
-
-        addBlazeDataType(BlazeDragon.PACKAGE_ID_DATA);
-        defineBlazeData();
-
         try
         {
-            BlazeDragon.addPackageInitVals(ID, blazeInitDataValues);
+            BlazeDragon.addPackageInitVals(id, defineBlazeData());
         }
         catch(BlazeIDAlreadyExistsException ex)
         {
             ex.printStackTrace();
         }
+    }
+
+    public BlazePackage()
+    {
 
     }
 
@@ -53,34 +52,33 @@ public abstract class BlazePackage implements BlazeModule
 
     private void initBlazeData()
     {
-        short id = BlazeDragon.detectClassID(this.getClass());                                                          // Anhand von PackageClasses-List passende IndexValue der InitValsList ermitteln
+        Short id = BlazeDragon.detectClassID(this.getClass());                                                          // Anhand von PackageClasses-List passende IndexValue der InitValsList ermitteln
+        byte[] initBytes = BlazeDragon.getPackageInitBytes(id);                                                         // Anhand ID InitValues-List einholen         // Init Value registrieren
 
-        this.blazeInitDataValues = BlazeDragon.getPackageInitVals(id);                                                  // Anhand ID InitValues-List einholen         // Init Value registrieren
-
-        for(int i = 0; i < this.blazeInitDataValues.size();i++)
+        for(int i = 0; i < initBytes.length;i++)
         {
-            byte typeVal = this.blazeInitDataValues.get(i);
+            byte typeVal = initBytes[i];
 
             switch(typeVal)
             {
                 case BlazeDragon.BOOLEAN_DATA:
                 {
-                    this.blazeDatas.add(new BlazeData(false));
+                    this.blazeDatas[i] = new BlazeData(false);
                     break;
                 }
                 case BlazeDragon.DOUBLE_DATA:
                 {
-                    this.blazeDatas.add(new BlazeData((double) 0));
+                    this.blazeDatas[i] = new BlazeData((double) 0);
                     break;
                 }
                 case BlazeDragon.STRING_DATA:
                 {
-                    this.blazeDatas.add(new BlazeData(""));
+                    this.blazeDatas[i] = new BlazeData("");
                     break;
                 }
                 case BlazeDragon.PACKAGE_ID_DATA:
                 {
-                    this.blazeDatas.add(new BlazeData(id));                                                             // Package ID ist festgelegt
+                    this.blazeDatas[i] = (new BlazeData(id));                                                             // Package ID ist festgelegt
                     break;
                 }
             }
@@ -93,42 +91,40 @@ public abstract class BlazePackage implements BlazeModule
         {
             case BlazeDragon.BOOLEAN_DATA:
             {
-                this.blazeDatas.get(index).setBoolean((Boolean) data);
+                this.blazeDatas[index].setBoolean((Boolean) data);
                 break;
             }
             case BlazeDragon.DOUBLE_DATA:
             {
-                this.blazeDatas.get(index).setDouble((Double) data);
+                this.blazeDatas[index].setDouble((Double) data);
                 break;
             }
             case BlazeDragon.STRING_DATA:
             {
-                this.blazeDatas.get(index).setStr((String) data);
+                this.blazeDatas[index].setStr((String) data);
                 break;
             }
             case BlazeDragon.PACKAGE_ID_DATA:
             {
-                this.blazeDatas.get(index).setBlazePackIdentifier((Short) data);
+                this.blazeDatas[index].setBlazePackIdentifier((Short) data);
                 break;
             }
         }
     }
 
-    protected void addBlazeDataType(byte signalType)                                                                    // Verwendung in defineSignals() Methode des BlazeModuls
-    {
-        this.blazeInitDataValues.add(signalType);
-    }
 
-    protected BlazeData getBlazeData(int index)                                                                              // Für Getter des Blaze-Packages
+    protected BlazeData getBlazeData(int index)                                                                         // Für Getter des Blaze-Packages
     {
-        return blazeDatas.get(index);
+        return blazeDatas[index];
     }
 
     public BlazeData[] getBlazeDatas()                                                                                  // Für Serialisierung
     {
-        BlazeData[] outArray = new BlazeData[this.blazeDatas.size()];
-        outArray = this.blazeDatas.toArray(outArray);
+        return blazeDatas;
+    }
 
-        return outArray;
+    public void setBlazeDatas (BlazeData[] bdArray)
+    {
+        this.blazeDatas = bdArray;
     }
 }
