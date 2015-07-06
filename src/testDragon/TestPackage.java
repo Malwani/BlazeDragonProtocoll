@@ -34,7 +34,7 @@ public class TestPackage extends BlazePackage
         // Indexstart bei 1 da 0 mit PAckInit belegt ist
         try
         {
-            this.setData(1, BlazeDragon.BOOLEAN_DATA, bool);
+            this.getBlazeData(1).setBoolean(bool);
         }
         catch (UnfittingBlazeDataException ex)
         {
@@ -43,16 +43,24 @@ public class TestPackage extends BlazePackage
 
     }
 
-    void setUsername(String uname) throws UnfittingBlazeDataException
+    void setUsername(String uname)
     {
-        this.getBlazeData(2).setStr(uname);
+        try
+        {
+            this.getBlazeData(2).setStr(uname);
+        }
+        catch (UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
+
     }
 
     void setPass(String pass)
     {
         try
         {
-            this.setData(3, BlazeDragon.STRING_DATA, pass);
+            this.getBlazeData(3).setStr(pass);
         }
         catch (UnfittingBlazeDataException ex)
         {
@@ -64,7 +72,7 @@ public class TestPackage extends BlazePackage
     {
         try
         {
-            this.setData(4, BlazeDragon.DOUBLE_DATA, d);
+            this.getBlazeData(4).setDouble(d);
         }
         catch (UnfittingBlazeDataException ex)
         {

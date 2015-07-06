@@ -29,15 +29,16 @@ public class TestPackageInit
 
         try
         {
-            test.setLoggedIn(true);
-            test.setPass("mario123");
-            test.setUsername("espanhola");
+            test.setLoggedIn(false);
+            test.setPass("Malwani");
+            test.setUsername("PsyclopZ");
             test.setDouble(4578.5);
             System.out.println(test.getLoggedIn());
             System.out.println(test.getPass());
             System.out.println(test.getUsername());
             System.out.println(test.getDouble());
-        }catch(UnfittingBlazeDataException ex)
+        }
+        catch(UnfittingBlazeDataException ex)
         {
             ex.printStackTrace();
         }

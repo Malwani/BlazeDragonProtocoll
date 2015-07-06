@@ -33,7 +33,7 @@ public class DragonBenchmark
 
         tp.setLoggedIn(true);
         tp.setPass("mario123");
-        tp.setUsername("espanhola");
+        tp.setUsername("Malwani");
         tp.setDouble(4578.5);
         blazeDatas = tp.getBlazeDatas();
 

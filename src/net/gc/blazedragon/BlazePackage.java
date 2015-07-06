@@ -25,7 +25,16 @@ public abstract class BlazePackage implements BlazeModule
             int size = BlazeDragon.getPackageInitBytes(BlazeDragon.detectClassID(this.getClass())).length;
 
             this.blazeDatas = new BlazeData[size];
-            initBlazeData();
+            try
+            {
+                initBlazeData();
+            }
+            catch (UnfittingBlazeDataException ex)
+            {
+                ex.printStackTrace();
+                System.out.println("Die Initialisierung des BlazePackages ist aufgrund von ung�ltigen Daten fehlgeschlagen.");
+            }
+
         }
     }
 
@@ -45,7 +54,7 @@ public abstract class BlazePackage implements BlazeModule
     //                                              METHODEN                                                            //
     //******************************************************************************************************************//
 
-    private void initBlazeData()
+    private void initBlazeData() throws UnfittingBlazeDataException
     {
         Short id = BlazeDragon.detectClassID(this.getClass());                                                          // Anhand von PackageClasses-List passende IndexValue der InitValsList ermitteln
         byte[] initBytes = BlazeDragon.getPackageInitBytes(id);                                                         // Anhand ID InitValues-List einholen         // Init Value registrieren
@@ -76,51 +85,23 @@ public abstract class BlazePackage implements BlazeModule
                     this.blazeDatas[i] = (new BlazeData(id));                                                             // Package ID ist festgelegt
                     break;
                 }
+                default:
+                    throw new UnfittingBlazeDataException();
             }
         }
     }
 
-
-    // SINNLOS DA BLAZEDATAS DIREKT VIA GETBLAZEDATA ANGEPEILT UND BESCHRIEBEN WERDEN KÖNNEN!!!! ÄNDERN!!!!
-    protected void setData(int index, byte dataType, Object data) throws UnfittingBlazeDataException                    // F�r Setter des Endo-Packages dataType über Blazedragon
-    {
-        switch(dataType)
-        {
-            case BlazeDragon.BOOLEAN_DATA:
-            {
-                this.blazeDatas[index].setBoolean((Boolean) data);
-                break;
-            }
-            case BlazeDragon.DOUBLE_DATA:
-            {
-                this.blazeDatas[index].setDouble((Double) data);
-                break;
-            }
-            case BlazeDragon.STRING_DATA:
-            {
-                this.blazeDatas[index].setStr((String) data);
-                break;
-            }
-            case BlazeDragon.PACKAGE_ID_DATA:
-            {
-                this.blazeDatas[index].setBlazePackIdentifier((Short) data);
-                break;
-            }
-        }
-    }
-//// SIEHE OBEN!!!!
-
-    protected BlazeData getBlazeData(int index)                                                                         // Für Getter des Blaze-Packages
+    protected BlazeData getBlazeData(int index)                                                                         // Für Getter/Setter des Blaze-Packages
     {
         return blazeDatas[index];
     }
 
-    public BlazeData[] getBlazeDatas()                                                                                  // Für Serialisierung
+    public BlazeData[] getBlazeDatas()                                                                                  // F�r Serialisierung
     {
         return blazeDatas;
     }
 
-    public void setBlazeDatas (BlazeData[] bdArray)
+    public void setBlazeDatas (BlazeData[] bdArray)                                                                     // F�r Deserialisierung
     {
         this.blazeDatas = bdArray;
     }
