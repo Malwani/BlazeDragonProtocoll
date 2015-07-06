@@ -22,7 +22,7 @@ public class DragonBenchmark
         try
         {
             addBdPackages(bd);
-        }catch(BlazePackageAlreadyExistsException ex)
+        }catch(BlazePackageAlreadyIntegratedException ex)
         {
             ex.printStackTrace();
         }
@@ -99,7 +99,7 @@ public class DragonBenchmark
         {
             addBdPackages(bd);
         }
-        catch(BlazePackageAlreadyExistsException ex)
+        catch(BlazePackageAlreadyIntegratedException ex)
         {
             ex.printStackTrace();
         }
@@ -154,7 +154,7 @@ public class DragonBenchmark
 
     }
 
-    public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyExistsException
+    public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyIntegratedException
     {
         bd.addPackage(new TestPackage(BlazeDragon.detectNextPackageID()));
     }

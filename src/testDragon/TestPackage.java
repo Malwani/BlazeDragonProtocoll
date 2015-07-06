@@ -43,16 +43,9 @@ public class TestPackage extends BlazePackage
 
     }
 
-    void setUsername(String uname)
+    void setUsername(String uname) throws UnfittingBlazeDataException
     {
-        try
-        {
-            this.setData(2, BlazeDragon.STRING_DATA, uname);
-        }
-        catch (UnfittingBlazeDataException ex)
-        {
-            ex.printStackTrace();
-        }
+        this.getBlazeData(2).setStr(uname);
     }
 
     void setPass(String pass)

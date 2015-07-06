@@ -1,7 +1,7 @@
 package testDragon;
 
 import net.gc.blazedragon.BlazeDragon;
-import net.gc.blazedragon.BlazePackageAlreadyExistsException;
+import net.gc.blazedragon.BlazePackageAlreadyIntegratedException;
 import net.gc.blazedragon.UnfittingBlazeDataException;
 
 /**
@@ -18,7 +18,7 @@ public class TestPackageInit
         {
             addBdPackages(bd);
         }
-        catch(BlazePackageAlreadyExistsException ex)
+        catch(BlazePackageAlreadyIntegratedException ex)
         {
             ex.printStackTrace();
         }
@@ -54,7 +54,7 @@ public class TestPackageInit
 
     }
 
-    public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyExistsException
+    public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyIntegratedException
     {
         bd.addPackage(new TestPackage(BlazeDragon.detectNextPackageID()));
     }

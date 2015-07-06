@@ -19,7 +19,7 @@ import java.util.*;
 public class BlazeDragon
 {
     private static ArrayList<Class> packageClasses;
-    private static ArrayList<List<Byte>>  packageDataInitValues;
+    private static ArrayList<List<Byte>> packageDataInitValues;
 
     //******************************************************************************************************************//
     //                                          BLAZEDATA-TYPE INDICATORS                                               //
@@ -27,10 +27,9 @@ public class BlazeDragon
 
     public static final byte PACKAGE_END     = -128;
     public static final byte PACKAGE_ID_DATA = -50;
-    public static final byte WRONG_DATA      = -1 ;
-    public static final byte BOOLEAN_DATA    = -2 ;
-    public static final byte DOUBLE_DATA     = -3 ;
-    public static final byte STRING_DATA     = -4 ;
+    public static final byte BOOLEAN_DATA    = -1 ;
+    public static final byte DOUBLE_DATA     = -2 ;
+    public static final byte STRING_DATA     = -3 ;
 
     //******************************************************************************************************************//
     //                                               KONSTRUKTOR                                                        //
@@ -64,7 +63,7 @@ public class BlazeDragon
         return (short) packageClasses.indexOf(PackageClass);
     }
 
-    public void addPackage(BlazePackage newPackageClass) throws BlazePackageAlreadyExistsException                      // Packagedeklaration
+    public void addPackage(BlazePackage newPackageClass) throws BlazePackageAlreadyIntegratedException                  // Packagedeklaration
     {
         if( ! packageClasses.contains(newPackageClass.getClass()))
         {
@@ -72,7 +71,7 @@ public class BlazeDragon
         }
         else
         {
-            throw new BlazePackageAlreadyExistsException();
+            throw new BlazePackageAlreadyIntegratedException();
         }
     }
 
@@ -233,7 +232,7 @@ public class BlazeDragon
 
                         for (int a = 0; a < 8; a++)
                         {
-                            byteData.add(bbuff.get(a));                                                             // Byte für Byte aus dem Buffer lesen und im Array speichern
+                            byteData.add(bbuff.get(a));                                                                 // Byte für Byte aus dem Buffer lesen und im Array speichern
                         }
                         break;
                     }

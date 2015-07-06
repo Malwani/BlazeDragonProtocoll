@@ -29,7 +29,7 @@ public abstract class BlazePackage implements BlazeModule
         }
     }
 
-    public BlazePackage(short id)                                                                                       // Konstruktor zur Package Deklaration
+    public BlazePackage(short id)                                                                                       // Konstruktor zur Package Integration
     {
         try
         {
@@ -79,7 +79,9 @@ public abstract class BlazePackage implements BlazeModule
             }
         }
     }
-    
+
+
+    // SINNLOS DA BLAZEDATAS DIREKT VIA GETBLAZEDATA ANGEPEILT UND BESCHRIEBEN WERDEN KÖNNEN!!!! ÄNDERN!!!!
     protected void setData(int index, byte dataType, Object data) throws UnfittingBlazeDataException                    // F�r Setter des Endo-Packages dataType über Blazedragon
     {
         switch(dataType)
@@ -106,7 +108,7 @@ public abstract class BlazePackage implements BlazeModule
             }
         }
     }
-
+//// SIEHE OBEN!!!!
 
     protected BlazeData getBlazeData(int index)                                                                         // Für Getter des Blaze-Packages
     {
