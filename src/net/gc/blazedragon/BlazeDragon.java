@@ -22,7 +22,7 @@ public class BlazeDragon
     private static ArrayList<List<Byte>> packageDataInitValues;
 
     //******************************************************************************************************************//
-    //                                          BLAZEDATA-TYPE INDICATORS                                               //
+    //                                            BLAZEDATA-INDICATORS                                                  //
     //******************************************************************************************************************//
 
     public static final byte PACKAGE_END     = -128;
@@ -133,7 +133,7 @@ public class BlazeDragon
                 {
                     case BOOLEAN_DATA:
                     {
-                        blazeDatas[i] = new BlazeData(inputBytesBuffer.get() != 0);                                    // Next-Byte aus dem Buffer auslesen, in bool konvertieren und dem neuen Signal übergeben
+                        blazeDatas[i] = new BlazeData(inputBytesBuffer.get() != 0);                                     // Next-Byte aus dem Buffer auslesen, in bool konvertieren und dem neuen Signal übergeben
 
                         break;
                     }
@@ -145,7 +145,7 @@ public class BlazeDragon
                     }
                     case STRING_DATA:
                     {
-                        List<Byte> strBytes = new ArrayList<Byte>();                                                    // Bytearray für Bytes des Strings erstellen
+                        List<Byte> strBytes = new ArrayList<Byte>();                                                       // Bytearray für Bytes des Strings erstellen
                         ByteArrayOutputStream bout = new ByteArrayOutputStream(strBytes.size());
 
                         while(true)
@@ -193,7 +193,7 @@ public class BlazeDragon
 
     public static byte[] getBytes(BlazeData[] bdArray) throws UnfittingBlazeDataException
     {
-        List<Byte> byteData = new ArrayList<Byte>();                                                                                            // ArrayList für ByteArrays erstellen
+        List<Byte> byteData = new ArrayList<Byte>();                                                                       // ArrayList für ByteArrays erstellen
         ByteBuffer bbuff;
 
         if(bdArray[0].getType() != PACKAGE_ID_DATA )                                                                    // wenn Falsches Signal
@@ -244,7 +244,7 @@ public class BlazeDragon
 
                         try
                         {
-                            bbuff.put(bdArray[i].getDataStr().getBytes("ISO-8859-1"));                                      // String in Bytearray umwandeln und im Buffer speichern
+                            bbuff.put(bdArray[i].getDataStr().getBytes("ISO-8859-1"));                                  // String in Bytearray umwandeln und im Buffer speichern
                         }
                         catch (UnsupportedEncodingException e)
                         {
@@ -267,7 +267,7 @@ public class BlazeDragon
                     case BlazeDragon.PACKAGE_ID_DATA:
                     {
                         byteData.add(bdArray[i].getType());
-                        bbuff       = ByteBuffer.allocate(2);                                                           // Bytebuffer erstellen, um Short in Bytes umzuwandeln
+                        bbuff = ByteBuffer.allocate(2);                                                                 // Bytebuffer erstellen, um Short in Bytes umzuwandeln
                         bbuff.putShort(bdArray[i].getBlazePackIdentifier());
 
                         byteData.add(bbuff.get(0));                                                                     // Erstes "Short Byte" ByteData anfügen (byteData[0] mit Typ belegt)
@@ -282,6 +282,7 @@ public class BlazeDragon
             }
         }
 
+        byteData.add(BlazeDragon.PACKAGE_END);                                                                          // End-Byte dem ByteArray zufügen
         return ArrayUtils.toPrimitive(byteData.toArray(new Byte[byteData.size()]));
     }
 }
