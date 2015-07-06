@@ -25,13 +25,14 @@ public class TestPackageInit
 
         TestPackage test = new TestPackage(true);
 
-        test.setLoggedIn(true);
-        test.setPass("mario123");
-        test.setUsername("espanhola");
-        test.setDouble(4578.5);
+
 
         try
         {
+            test.setLoggedIn(true);
+            test.setPass("mario123");
+            test.setUsername("espanhola");
+            test.setDouble(4578.5);
             System.out.println(test.getLoggedIn());
             System.out.println(test.getPass());
             System.out.println(test.getUsername());
@@ -40,7 +41,6 @@ public class TestPackageInit
         {
             ex.printStackTrace();
         }
-
 
 
         TestPackage test2 = new TestPackage(false);
