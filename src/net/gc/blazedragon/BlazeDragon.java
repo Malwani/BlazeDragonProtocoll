@@ -83,7 +83,7 @@ public class BlazeDragon
         {
             List initList = new ArrayList<Byte>();
 
-            initList.add((byte) -50);                                                                                   // ID-typ hinzufügen
+            initList.add(BlazeDragon.PACKAGE_ID_DATA);                                                                  // ID-typ hinzufügen
             initList.addAll(Arrays.asList(initBytes));                                                                  // InitList zusammenfügen
             packageDataInitValues.add(id,initList);                                                                     // InitList hinzufügen
         }
@@ -263,7 +263,7 @@ public class BlazeDragon
 
                         try
                         {
-                            bbuff.put(bdArray[i].getDataStr().getBytes("ISO-8859-1"));                                  // String in Bytearray umwandeln und im Buffer speichern
+                            bbuff.put(bdArray[i].getDataStr().getBytes("UTF-8"));                                       // String in Bytearray umwandeln und im Buffer speichern
                         }
                         catch (UnsupportedEncodingException e)
                         {
