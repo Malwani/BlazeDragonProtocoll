@@ -82,7 +82,7 @@ public abstract class BlazePackage implements BlazeModule
                 }
                 case BlazeDragon.PACKAGE_ID_DATA:
                 {
-                    this.blazeDatas[i] = (new BlazeData(id));                                                             // Package ID ist festgelegt
+                    this.blazeDatas[i] = new BlazeData(id);                                                             // Package ID ist festgelegt
                     break;
                 }
                 default:
