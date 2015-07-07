@@ -56,8 +56,8 @@
       <file leaf-file-name="BlazeDragon.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeDragon.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="9.35">
-              <caret line="239" column="48" selection-start-line="239" selection-start-column="48" selection-end-line="239" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.7">
+              <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -851,7 +851,13 @@
       <option name="project" value="LOCAL" />
       <updated>1436257118466</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary=" V1.0.4&#10;&#10;Kleinständerung an Kommentaren&#10;">
+      <created>1436258274291</created>
+      <option name="number" value="00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1436258274291</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TodoView">
@@ -950,7 +956,8 @@
     <MESSAGE value=" V1.0.35&#10; Kleinständerungen&#10;" />
     <MESSAGE value=" V1.0.35&#10;BlatePAckInit verfpgt nun über Exception&#10;" />
     <MESSAGE value=" V1.0.4&#10;&#10;Integer-Objekte werden nun unterstützt.&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value=" V1.0.4&#10;&#10;Integer-Objekte werden nun unterstützt.&#10;" />
+    <MESSAGE value=" V1.0.4&#10;&#10;Kleinständerung an Kommentaren&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value=" V1.0.4&#10;&#10;Kleinständerung an Kommentaren&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1365,8 +1372,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeDragon.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="9.35">
-          <caret line="239" column="48" selection-start-line="239" selection-start-column="48" selection-end-line="239" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.7">
+          <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
           <folding />
         </state>
       </provider>
