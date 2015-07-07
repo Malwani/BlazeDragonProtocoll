@@ -29,7 +29,7 @@ public class BlazeDragon
     public static final byte DATA_END        = -127;
     public static final byte PACKAGE_ID_DATA = -50;
     public static final byte BOOLEAN_DATA    = -1 ;
-    public static final byte INTEGER_DATA    = -2 ; // Einügen in Serialisierungsprozess
+    public static final byte INTEGER_DATA    = -2 ;
     public static final byte DOUBLE_DATA     = -3 ;
     public static final byte STRING_DATA     = -4 ;
 
