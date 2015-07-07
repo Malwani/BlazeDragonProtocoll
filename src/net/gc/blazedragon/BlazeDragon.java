@@ -26,10 +26,12 @@ public class BlazeDragon
     //******************************************************************************************************************//
 
     public static final byte PACKAGE_END     = -128;
+    public static final byte DATA_END        = -127;
     public static final byte PACKAGE_ID_DATA = -50;
     public static final byte BOOLEAN_DATA    = -1 ;
-    public static final byte DOUBLE_DATA     = -2 ;
-    public static final byte STRING_DATA     = -3 ;
+    public static final byte INTEGER_DATA    = -2 ; // Einügen in Serialisierungsprozess
+    public static final byte DOUBLE_DATA     = -3 ;
+    public static final byte STRING_DATA     = -4 ;
 
     //******************************************************************************************************************//
     //                                               KONSTRUKTOR                                                        //
@@ -137,6 +139,11 @@ public class BlazeDragon
 
                         break;
                     }
+                    case INTEGER_DATA:
+                    {
+                        blazeDatas[i] = new BlazeData(inputBytesBuffer.getInt());
+                        break;
+                    }
                     case DOUBLE_DATA:
                     {
                         blazeDatas[i] = new BlazeData(inputBytesBuffer.getDouble());                                    // Double aus dem Buffer auslesen und dem neuen Signal übergeben
@@ -152,7 +159,7 @@ public class BlazeDragon
                         {
                             byte currByte = inputBytesBuffer.get();
 
-                            if(currByte != BlazeDragon.PACKAGE_END)
+                            if(currByte != BlazeDragon.DATA_END)
                                 strBytes.add(currByte);
                             else
                                 break;
@@ -224,10 +231,22 @@ public class BlazeDragon
                         }
                         break;
                     }
+                    case INTEGER_DATA:
+                    {
+                        byteData.add(bdArray[i].getType());
+                        bbuff = ByteBuffer.allocate(4);
+                        bbuff.putInt(bdArray[i].getDataInt());
+
+                        for (int a = 0; a < 4; a++)
+                        {
+                            byteData.add(bbuff.get(a));                                                                 // Byte für Byte aus dem Buffer lesen und im Array speichern
+                        }
+                        break;
+                    }
                     case BlazeDragon.DOUBLE_DATA:
                     {
                         byteData.add(bdArray[i].getType());
-                        bbuff       = ByteBuffer.allocate(8);                                                           // Bytebuffer erstellen, um Double in Bytes umzuwandeln
+                        bbuff = ByteBuffer.allocate(8);                                                                 // Bytebuffer erstellen, um Double in Bytes umzuwandeln
                         bbuff.putDouble(bdArray[i].getDataDouble());
 
                         for (int a = 0; a < 8; a++)
@@ -261,7 +280,7 @@ public class BlazeDragon
                             byteData.add(tmpBytes[a]);
                         }
 
-                        byteData.add(BlazeDragon.PACKAGE_END);                                                          // Package Ned zufügen da Größe beliebig
+                        byteData.add(BlazeDragon.DATA_END);                                                             // DATA_END-Byte zufügen da Größe beliebig
                         break;
                     }
                     case BlazeDragon.PACKAGE_ID_DATA:

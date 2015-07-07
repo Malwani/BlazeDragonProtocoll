@@ -22,6 +22,7 @@ public class BlazeData
     private boolean boolData;
     private double  doubleData;
     private String  strData;
+    private int     intData;
 
     //******************************************************************************************************************//
     //                                              KONSTRUKTOREN                                                       //
@@ -37,6 +38,12 @@ public class BlazeData
     {
         this.boolData = boolData;
         this.dataType = BlazeDragon.BOOLEAN_DATA;
+    }
+
+    public BlazeData(int intData)
+    {
+        this.intData = intData;
+        this.dataType = BlazeDragon.INTEGER_DATA;
     }
 
     public BlazeData(double doubleData)
@@ -65,6 +72,18 @@ public class BlazeData
         if (this.dataType == BlazeDragon.PACKAGE_ID_DATA )
         {
             return this.blazePackId;
+        }
+        else
+        {
+            throw new UnfittingBlazeDataException();
+        }
+    }
+
+    public int getDataInt() throws UnfittingBlazeDataException
+    {
+        if (this.dataType == BlazeDragon.INTEGER_DATA)
+        {
+            return this.intData;
         }
         else
         {
@@ -117,6 +136,18 @@ public class BlazeData
         if(this.dataType == BlazeDragon.PACKAGE_ID_DATA )
         {
             this.blazePackId = packInit;
+        }
+        else
+        {
+            throw new UnfittingBlazeDataException();
+        }
+    }
+
+    public void setInt(int intData) throws UnfittingBlazeDataException
+    {
+        if(this.dataType == BlazeDragon.INTEGER_DATA)
+        {
+            this.intData = intData;
         }
         else
         {

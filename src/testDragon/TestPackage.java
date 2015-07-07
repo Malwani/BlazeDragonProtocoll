@@ -22,7 +22,7 @@ public class TestPackage extends BlazePackage
     @Override
     public Byte[] defineBlazeData()
     {
-        Byte[] initBytes = {BlazeDragon.BOOLEAN_DATA, BlazeDragon.STRING_DATA, BlazeDragon.STRING_DATA, BlazeDragon.DOUBLE_DATA};
+        Byte[] initBytes = {BlazeDragon.BOOLEAN_DATA, BlazeDragon.STRING_DATA, BlazeDragon.INTEGER_DATA, BlazeDragon.DOUBLE_DATA};
 
         return initBytes;
     }
@@ -56,11 +56,11 @@ public class TestPackage extends BlazePackage
 
     }
 
-    void setPass(String pass)
+    void setInt(int val)
     {
         try
         {
-            this.getBlazeData(3).setStr(pass);
+            this.getBlazeData(3).setInt(val);
         }
         catch (UnfittingBlazeDataException ex)
         {
@@ -90,9 +90,9 @@ public class TestPackage extends BlazePackage
         return this.getBlazeData(2).getDataStr();
     }
 
-    String getPass() throws UnfittingBlazeDataException
+    int getInt() throws UnfittingBlazeDataException
     {
-        return this.getBlazeData(3).getDataStr();
+        return this.getBlazeData(3).getDataInt();
     }
 
     double getDouble() throws UnfittingBlazeDataException

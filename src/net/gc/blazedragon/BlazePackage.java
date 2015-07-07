@@ -70,6 +70,11 @@ public abstract class BlazePackage implements BlazeModule
                     this.blazeDatas[i] = new BlazeData(false);
                     break;
                 }
+                case BlazeDragon.INTEGER_DATA:
+                {
+                    this.blazeDatas[i] = new BlazeData(0);
+                    break;
+                }
                 case BlazeDragon.DOUBLE_DATA:
                 {
                     this.blazeDatas[i] = new BlazeData((double) 0);

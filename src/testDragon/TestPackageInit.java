@@ -30,11 +30,11 @@ public class TestPackageInit
         try
         {
             test.setLoggedIn(false);
-            test.setPass("Malwani");
+            test.setInt(584);
             test.setUsername("PsyclopZ");
             test.setDouble(4578.5);
             System.out.println(test.getLoggedIn());
-            System.out.println(test.getPass());
+            System.out.println(test.getInt());
             System.out.println(test.getUsername());
             System.out.println(test.getDouble());
         }
