@@ -7,6 +7,7 @@ import net.gc.blazedragon.UnfittingBlazeDataException;
 /**
  * Created by Benny on 07.03.2015.
  */
+
 public class TestPackage extends BlazePackage
 {
     TestPackage(short ID)                                                                                               // Für BlazeDragon Init
@@ -14,7 +15,7 @@ public class TestPackage extends BlazePackage
         super(ID);
     }
 
-    TestPackage(boolean init)                                                                                                       // Normale Init (BD Init vorrausgesetzt))
+    TestPackage(boolean init)                                                                                           // Normale Init (BD Init vorrausgesetzt))
     {
         super(init);
     }
@@ -22,25 +23,22 @@ public class TestPackage extends BlazePackage
     @Override
     public Byte[] defineBlazeData()
     {
-        Byte[] initBytes = {BlazeDragon.BOOLEAN_DATA, BlazeDragon.STRING_DATA, BlazeDragon.INTEGER_DATA, BlazeDragon.DOUBLE_DATA};
+        Byte[] initBytes = {BlazeDragon.BOOLEAN_DATA, BlazeDragon.STRING_DATA, BlazeDragon.INTEGER_DATA,
+                BlazeDragon.DOUBLE_DATA};
 
         return initBytes;
     }
-
-    // Sample Getter / Setter
-
+                                                                                                                        // Sample Getter / Setter
     void setLoggedIn(boolean bool)
     {
-        // Indexstart bei 1 da 0 mit PAckInit belegt ist
         try
         {
-            this.getBlazeData(1).setBoolean(bool);
+            this.getBlazeData(1).setBoolean(bool);                                                                      // Indexstart bei 1 da 0 mit PAckInit belegt ist
         }
         catch (UnfittingBlazeDataException ex)
         {
             ex.printStackTrace();
         }
-
     }
 
     void setUsername(String uname)
@@ -53,7 +51,6 @@ public class TestPackage extends BlazePackage
         {
             ex.printStackTrace();
         }
-
     }
 
     void setInt(int val)
