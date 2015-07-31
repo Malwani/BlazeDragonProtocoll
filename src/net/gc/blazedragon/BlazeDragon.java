@@ -96,13 +96,13 @@ public class BlazeDragon
     public static short detectNextPackageID()                                                                           // Nächste zu deklarierende Package ID ermitteln
     {
         if(packageDataInitValues.isEmpty())                                                                             // Wenn keine Größe vorhanden -> Next Index 0
-            return (short) 0;
+        return (short) 0;
         else
-            return (short) (packageDataInitValues.size());                                                              // Wenn Größe vorhanden size = index
+        return (short) (packageDataInitValues.size());                                                                  // Wenn Größe vorhanden size = index
     }
 
     //******************************************************************************************************************//
-    //                                             SERIALISIERUNG                                                       //
+    //                                          DE-SERIALISIERUNG                                                       //
     //******************************************************************************************************************//
 
     public static BlazeData[] getBlazeDatas(byte[] inputBytes) throws UnfittingBlazeDataException
@@ -152,31 +152,13 @@ public class BlazeDragon
                     }
                     case STRING_DATA:
                     {
-                        List<Byte> strBytes = new ArrayList<Byte>();                                                       // Bytearray für Bytes des Strings erstellen
-                        ByteArrayOutputStream bout = new ByteArrayOutputStream(strBytes.size());
-
-                        while(true)
-                        {
-                            byte currByte = inputBytesBuffer.get();
-
-                            if(currByte != BlazeDragon.DATA_END)
-                                strBytes.add(currByte);
-                            else
-                                break;
-                        }
-
-                        for(Byte curr : strBytes)                                                                       // Bout füllen
-                            bout.write(curr);
-
                         try
                         {
-                            blazeDatas[i] = new BlazeData(bout.toString("UTF-8"));
-                        }
-                        catch(UnsupportedEncodingException ex)
+                            blazeDatas[i] = deser2Str(inputBytesBuffer);
+                        }catch(UnfittingBlazeDataException ex)
                         {
                             ex.printStackTrace();
                         }
-
                         break;
                     }
                     case PACKAGE_ID_DATA:
@@ -198,6 +180,44 @@ public class BlazeDragon
         return blazeDatas;
     }
 
+    //******************************************************************************************************************//
+    //                                         DE-SERIALISIERER-METHODEN                                                //
+    //******************************************************************************************************************//
+
+    private static BlazeData deser2Str(ByteBuffer inputBytesBuf) throws UnfittingBlazeDataException                     // Bytefolge -> String
+    {
+        List<Byte> strBytes = new ArrayList<Byte>();                                                                        // ByteList für Bytes des Strings erstellen
+        ByteArrayOutputStream bout = new ByteArrayOutputStream(strBytes.size());
+
+        while(true)
+        {
+            byte currByte = inputBytesBuf.get();
+
+            if(currByte != BlazeDragon.DATA_END)
+                strBytes.add(currByte);
+            else
+                break;
+        }
+
+        for(Byte curr : strBytes)                                                                                       // Bout füllen
+            bout.write(curr);
+
+        try
+        {
+            return new BlazeData(bout.toString("UTF-8"));
+        }
+        catch(UnsupportedEncodingException ex)
+        {
+            ex.printStackTrace();
+            throw new UnfittingBlazeDataException();
+        }
+
+    }
+
+    //******************************************************************************************************************//
+    //                                              SERIALISIERUNG                                                      //
+    //******************************************************************************************************************//
+
     public static byte[] getBytes(BlazeData[] bdArray) throws UnfittingBlazeDataException
     {
         List<Byte> byteData = new ArrayList<Byte>();                                                                       // ArrayList für ByteArrays erstellen
@@ -215,7 +235,7 @@ public class BlazeDragon
 
                 switch(type)
                 {
-                    case BlazeDragon.BOOLEAN_DATA:
+                    case BOOLEAN_DATA:
                     {
                         byteData.add(bdArray[i].getType());
 
@@ -243,7 +263,7 @@ public class BlazeDragon
                         }
                         break;
                     }
-                    case BlazeDragon.DOUBLE_DATA:
+                    case DOUBLE_DATA:
                     {
                         byteData.add(bdArray[i].getType());
                         bbuff = ByteBuffer.allocate(8);                                                                 // Bytebuffer erstellen, um Double in Bytes umzuwandeln
@@ -255,7 +275,7 @@ public class BlazeDragon
                         }
                         break;
                     }
-                    case BlazeDragon.STRING_DATA:
+                    case STRING_DATA:
                     {
                         bbuff = ByteBuffer.allocate(1 + bdArray[i].getDataStr().length());                              // Bytebuffer mit doppelter Byteanzahl für chars, da UNICODE 2 Byte pro char verwendet & +1 für Type
                         bbuff.rewind();
@@ -283,7 +303,7 @@ public class BlazeDragon
                         byteData.add(BlazeDragon.DATA_END);                                                             // DATA_END-Byte zufügen da Größe beliebig
                         break;
                     }
-                    case BlazeDragon.PACKAGE_ID_DATA:
+                    case PACKAGE_ID_DATA:
                     {
                         byteData.add(bdArray[i].getType());
                         bbuff = ByteBuffer.allocate(2);                                                                 // Bytebuffer erstellen, um Short in Bytes umzuwandeln
@@ -301,7 +321,18 @@ public class BlazeDragon
             }
         }
 
-        byteData.add(BlazeDragon.PACKAGE_END);                                                                          // End-Byte dem ByteArray zufügen
+        byteData.add(PACKAGE_END);                                                                                      // End-Byte dem ByteArray zufügen
         return ArrayUtils.toPrimitive(byteData.toArray(new Byte[byteData.size()]));
     }
+
+    //******************************************************************************************************************//
+    //                                            SERIALISIERER-METHODEN                                                //
+    //******************************************************************************************************************//
+
+    private static void serBool ()
+    {
+
+    }
+
+
 }
