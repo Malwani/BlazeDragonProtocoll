@@ -83,7 +83,7 @@ public class BlazeDragon
         {
             List initList = new ArrayList<Byte>();
 
-            initList.add(BlazeDragon.PACKAGE_ID_DATA);                                                                  // ID-typ hinzufügen
+            initList.add(PACKAGE_ID_DATA);                                                                              // ID-typ hinzufügen
             initList.addAll(Arrays.asList(initBytes));                                                                  // InitList zusammenfügen
             packageDataInitValues.add(id,initList);                                                                     // InitList hinzufügen
         }
@@ -136,7 +136,6 @@ public class BlazeDragon
                     case BOOLEAN_DATA:
                     {
                         blazeDatas[i] = new BlazeData(inputBytesBuffer.get() != 0);                                     // Next-Byte aus dem Buffer auslesen, in bool konvertieren und dem neuen Signal übergeben
-
                         break;
                     }
                     case INTEGER_DATA:
@@ -147,7 +146,6 @@ public class BlazeDragon
                     case DOUBLE_DATA:
                     {
                         blazeDatas[i] = new BlazeData(inputBytesBuffer.getDouble());                                    // Double aus dem Buffer auslesen und dem neuen Signal übergeben
-
                         break;
                     }
                     case STRING_DATA:
@@ -164,7 +162,6 @@ public class BlazeDragon
                     case PACKAGE_ID_DATA:
                     {
                         blazeDatas[i] = new BlazeData(inputBytesBuffer.getShort());                                     // PackInit-Short aus dem Buffer auslesen und dem neuen Signal übergeben
-
                         break;
                     }
                     default:                                                                                            // Falsches Signal empfangen
@@ -193,7 +190,7 @@ public class BlazeDragon
         {
             byte currByte = inputBytesBuf.get();
 
-            if(currByte != BlazeDragon.DATA_END)
+            if(currByte != DATA_END)
                 strBytes.add(currByte);
             else
                 break;
@@ -211,7 +208,6 @@ public class BlazeDragon
             ex.printStackTrace();
             throw new UnfittingBlazeDataException();
         }
-
     }
 
     //******************************************************************************************************************//
@@ -221,7 +217,6 @@ public class BlazeDragon
     public static byte[] getBytes(BlazeData[] bdArray) throws UnfittingBlazeDataException
     {
         List<Byte> byteData = new ArrayList<Byte>();                                                                       // ArrayList für ByteArrays erstellen
-        ByteBuffer bbuff;
 
         if(bdArray[0].getType() != PACKAGE_ID_DATA )                                                                    // wenn Falsches Signal
         {
@@ -237,80 +232,27 @@ public class BlazeDragon
                 {
                     case BOOLEAN_DATA:
                     {
-                        byteData.add(bdArray[i].getType());
-
-                        if (bdArray[i].getDataBoolean())
-                        {
-                            Byte b = 1;
-                            byteData.add(b);
-                        }
-                        else
-                        {
-                            Byte b = 0;
-                            byteData.add(b);
-                        }
+                        serBool(bdArray[i], byteData);
                         break;
                     }
                     case INTEGER_DATA:
                     {
-                        byteData.add(bdArray[i].getType());
-                        bbuff = ByteBuffer.allocate(4);
-                        bbuff.putInt(bdArray[i].getDataInt());
-
-                        for (int a = 0; a < 4; a++)
-                        {
-                            byteData.add(bbuff.get(a));                                                                 // Byte für Byte aus dem Buffer lesen und im Array speichern
-                        }
+                        serInt(bdArray[i], byteData);
                         break;
                     }
                     case DOUBLE_DATA:
                     {
-                        byteData.add(bdArray[i].getType());
-                        bbuff = ByteBuffer.allocate(8);                                                                 // Bytebuffer erstellen, um Double in Bytes umzuwandeln
-                        bbuff.putDouble(bdArray[i].getDataDouble());
-
-                        for (int a = 0; a < 8; a++)
-                        {
-                            byteData.add(bbuff.get(a));                                                                 // Byte für Byte aus dem Buffer lesen und im Array speichern
-                        }
+                        serDouble(bdArray[i], byteData);
                         break;
                     }
                     case STRING_DATA:
                     {
-                        bbuff = ByteBuffer.allocate(1 + bdArray[i].getDataStr().length());                              // Bytebuffer mit doppelter Byteanzahl für chars, da UNICODE 2 Byte pro char verwendet & +1 für Type
-                        bbuff.rewind();
-                        bbuff.put(bdArray[i].getType());                                                                // Type im buffer speichern
-
-                        try
-                        {
-                            bbuff.put(bdArray[i].getDataStr().getBytes("UTF-8"));                                       // String in Bytearray umwandeln und im Buffer speichern
-                        }
-                        catch (UnsupportedEncodingException e)
-                        {
-                            throw new UnfittingBlazeDataException();
-                        }
-
-                        byte[] tmpBytes = new byte[bbuff.limit()];
-
-                        bbuff.flip();                                                                                   // Buffer zum Schreiben "zurücksetzen"
-                        bbuff.get(tmpBytes);
-
-                        for(int a = 0;a < bbuff.limit();a++)
-                        {
-                            byteData.add(tmpBytes[a]);
-                        }
-
-                        byteData.add(BlazeDragon.DATA_END);                                                             // DATA_END-Byte zufügen da Größe beliebig
+                        serStr(bdArray[i], byteData);
                         break;
                     }
                     case PACKAGE_ID_DATA:
                     {
-                        byteData.add(bdArray[i].getType());
-                        bbuff = ByteBuffer.allocate(2);                                                                 // Bytebuffer erstellen, um Short in Bytes umzuwandeln
-                        bbuff.putShort(bdArray[i].getBlazePackIdentifier());
-
-                        byteData.add(bbuff.get(0));                                                                     // Erstes "Short Byte" ByteData anfügen (byteData[0] mit Typ belegt)
-                        byteData.add(bbuff.get(1));
+                        serShortID(bdArray[i], byteData);
                         break;
                     }
                     default:
@@ -329,10 +271,124 @@ public class BlazeDragon
     //                                            SERIALISIERER-METHODEN                                                //
     //******************************************************************************************************************//
 
-    private static void serBool ()
+    private static void serShortID (BlazeData bdInput, List<Byte> outBytes)
     {
+        ByteBuffer bbuff = ByteBuffer.allocate(2);                                                                      // Bytebuffer erstellen, um Short in Bytes umzuwandeln
 
+        outBytes.add(bdInput.getType());
+
+        try
+        {
+            bbuff.putShort(bdInput.getBlazePackIdentifier());
+        }catch(UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        outBytes.add(bbuff.get(0));                                                                                     // Erstes "Short Byte" ByteData anfügen (byteData[0] mit Typ belegt)
+        outBytes.add(bbuff.get(1));
     }
 
+    private static void serBool (BlazeData bdInput, List<Byte> outBytes)
+    {
+        outBytes.add(bdInput.getType());
 
+        try
+        {
+            if (bdInput.getDataBoolean())
+            {
+                Byte b = 1;
+                outBytes.add(b);
+            }
+            else
+            {
+                Byte b = 0;
+                outBytes.add(b);
+            }
+        }catch(UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    private static void serInt(BlazeData bdInput, List<Byte> outBytes)
+    {
+        ByteBuffer bbuff = ByteBuffer.allocate(4);
+        outBytes.add(bdInput.getType());
+
+        try
+        {
+            bbuff.putInt(bdInput.getDataInt());
+        }catch (UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        for (int a = 0; a < 4; a++)
+        {
+            outBytes.add(bbuff.get(a));                                                                                 // Byte für Byte aus dem Buffer lesen und im Array speichern
+        }
+    }
+
+    private static void serDouble(BlazeData bdInput, List<Byte> outBytes)
+    {
+        ByteBuffer bbuff = ByteBuffer.allocate(8);                                                                      // Bytebuffer erstellen, um Double in Bytes umzuwandeln
+        outBytes.add(bdInput.getType());
+
+        try
+        {
+            bbuff.putDouble(bdInput.getDataDouble());
+        }catch(UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        for (int a = 0; a < 8; a++)
+        {
+            outBytes.add(bbuff.get(a));                                                                                 // Byte für Byte aus dem Buffer lesen und im Array speichern
+        }
+    }
+
+    private static void serStr(BlazeData bdInput, List<Byte> outBytes)
+    {
+        int length = 0;
+        ByteBuffer bbuff;
+
+        try
+        {
+            length = bdInput.getDataStr().length() + 1;
+        }catch(UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        bbuff =  ByteBuffer.allocate(length);                                                                           // Bytebuffer mit doppelter Byteanzahl für chars, da UNICODE 2 Byte pro char verwendet & +1 für Type
+        bbuff.rewind();
+        bbuff.put(bdInput.getType());                                                                                   // Type im buffer speichern
+
+        try
+        {
+            bbuff.put(bdInput.getDataStr().getBytes("UTF-8"));                                                          // String in Bytearray umwandeln und im Buffer speichern
+        }
+        catch (UnsupportedEncodingException ex)
+        {
+            ex.printStackTrace();
+        }
+        catch(UnfittingBlazeDataException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        byte[] tmpBytes = new byte[bbuff.limit()];
+
+        bbuff.flip();                                                                                                   // Buffer zum Schreiben "zurücksetzen"
+        bbuff.get(tmpBytes);
+
+        for(int a = 0;a < bbuff.limit();a++)
+        {
+            outBytes.add(tmpBytes[a]);
+        }
+
+        outBytes.add(DATA_END);                                                                                         // DATA_END-Byte zufügen da Größe beliebig
+    }
 }

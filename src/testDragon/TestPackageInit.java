@@ -29,8 +29,8 @@ public class TestPackageInit
 
         try
         {
-            test.setLoggedIn(false);
-            test.setInt(584);
+            test.setLoggedIn(true);
+            test.setInt(420);
             test.setUsername("PsyclopZ");
             test.setDouble(4578.5);
             System.out.println(test.getLoggedIn());
