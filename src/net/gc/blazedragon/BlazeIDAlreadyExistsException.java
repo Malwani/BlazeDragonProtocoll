@@ -1,7 +1,7 @@
 package net.gc.blazedragon;
 
 /**
- * Created by Malwani on 27.03.2015.
+ * Created by MPsyclopZ on 27.03.2015.
  */
 public class BlazeIDAlreadyExistsException extends Exception
 {
