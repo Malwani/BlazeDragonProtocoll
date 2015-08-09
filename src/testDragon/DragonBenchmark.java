@@ -1,11 +1,6 @@
 package testDragon;
 
-/**
- * Created by Benny on 07.03.2015.
- */
-
 import net.gc.blazedragon.*;
-
 import java.util.Scanner;
 
 public class DragonBenchmark

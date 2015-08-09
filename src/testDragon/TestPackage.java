@@ -4,10 +4,6 @@ import net.gc.blazedragon.BlazeDragon;
 import net.gc.blazedragon.BlazePackage;
 import net.gc.blazedragon.UnfittingBlazeDataException;
 
-/**
- * Created by Benny on 07.03.2015.
- */
-
 public class TestPackage extends BlazePackage
 {
     TestPackage(short ID)                                                                                               // Für BlazeDragon Init

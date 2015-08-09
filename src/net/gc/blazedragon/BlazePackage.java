@@ -1,9 +1,5 @@
 package net.gc.blazedragon;
 
-/**
- * Created by PsyclopZ on 28.02.2015.
- */
-
     //******************************************************************************************************************//
     //                                                                                                                  //
     //                                       PACKAGE-CLASS FOR THE DRAGON                                               //
@@ -32,7 +28,8 @@ public abstract class BlazePackage implements BlazeModule
             catch (UnfittingBlazeDataException ex)
             {
                 ex.printStackTrace();
-                System.out.println("Die Initialisierung des BlazePackages ist aufgrund von ungültigen Daten fehlgeschlagen.");
+                System.out.println("Die Initialisierung des BlazePackages " +
+                        "ist aufgrund von ungültigen Daten fehlgeschlagen.");
             }
 
         }

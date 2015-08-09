@@ -4,9 +4,6 @@ import net.gc.blazedragon.BlazeDragon;
 import net.gc.blazedragon.BlazePackageAlreadyIntegratedException;
 import net.gc.blazedragon.UnfittingBlazeDataException;
 
-/**
- * Created by Benjie on 23.06.2015.
- */
 public class TestPackageInit
 {
     public static void main(String[] args)

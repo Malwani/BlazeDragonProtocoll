@@ -8,6 +8,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/gc/blazedragon/BlazeModule.java" afterPath="$PROJECT_DIR$/src/net/gc/blazedragon/BlazeModule.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/gc/blazedragon/BlazePackage.java" afterPath="$PROJECT_DIR$/src/net/gc/blazedragon/BlazePackage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/gc/blazedragon/BlazePackageAlreadyIntegratedException.java" afterPath="$PROJECT_DIR$/src/net/gc/blazedragon/BlazePackageAlreadyIntegratedException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testDragon/DragonBenchmark.java" afterPath="$PROJECT_DIR$/src/testDragon/DragonBenchmark.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testDragon/TestPackage.java" afterPath="$PROJECT_DIR$/src/testDragon/TestPackage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/testDragon/TestPackageInit.java" afterPath="$PROJECT_DIR$/src/testDragon/TestPackageInit.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/gc/blazedragon/UnfittingBlazeDataException.java" afterPath="$PROJECT_DIR$/src/net/gc/blazedragon/UnfittingBlazeDataException.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -40,10 +43,20 @@
         <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeDragon.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BlazeData.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -52,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeIDAlreadyExistsException.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -62,37 +75,7 @@
         <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeModule.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BlazePackageAlreadyIntegratedException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazePackageAlreadyIntegratedException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UnfittingBlazeDataException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/UnfittingBlazeDataException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DragonBenchmark.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/testDragon/DragonBenchmark.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49945593">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -102,18 +85,64 @@
         <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazePackage.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BlazeData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeData.java">
+      <file leaf-file-name="BlazePackageAlreadyIntegratedException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazePackageAlreadyIntegratedException.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UnfittingBlazeDataException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/UnfittingBlazeDataException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DragonBenchmark.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/testDragon/DragonBenchmark.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestPackage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/testDragon/TestPackage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestPackageInit.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/testDragon/TestPackageInit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.13802436">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -160,16 +189,16 @@
         <option value="$PROJECT_DIR$/src/testDragon/TestPackage4.java" />
         <option value="$PROJECT_DIR$/src/testDragon/TestPackage3.java" />
         <option value="$PROJECT_DIR$/src/testDragon/TestPackage2.java" />
-        <option value="$PROJECT_DIR$/src/testDragon/DragonBenchmark.java" />
-        <option value="$PROJECT_DIR$/src/testDragon/TestPackage.java" />
-        <option value="$PROJECT_DIR$/src/testDragon/TestPackageInit.java" />
-        <option value="$PROJECT_DIR$/src/net/gc/blazedragon/BlazeDragon.java" />
         <option value="$PROJECT_DIR$/src/net/gc/blazedragon/BlazeData.java" />
+        <option value="$PROJECT_DIR$/src/net/gc/blazedragon/BlazeDragon.java" />
         <option value="$PROJECT_DIR$/src/net/gc/blazedragon/BlazeIDAlreadyExistsException.java" />
         <option value="$PROJECT_DIR$/src/net/gc/blazedragon/BlazeModule.java" />
         <option value="$PROJECT_DIR$/src/net/gc/blazedragon/BlazePackage.java" />
         <option value="$PROJECT_DIR$/src/net/gc/blazedragon/BlazePackageAlreadyIntegratedException.java" />
         <option value="$PROJECT_DIR$/src/net/gc/blazedragon/UnfittingBlazeDataException.java" />
+        <option value="$PROJECT_DIR$/src/testDragon/DragonBenchmark.java" />
+        <option value="$PROJECT_DIR$/src/testDragon/TestPackage.java" />
+        <option value="$PROJECT_DIR$/src/testDragon/TestPackageInit.java" />
       </list>
     </option>
   </component>
@@ -184,10 +213,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-1448" />
+    <option name="y" value="108" />
+    <option name="width" value="1456" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -234,9 +263,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -588,12 +617,6 @@
       <option name="number" value="Default" />
       <updated>1425139484930</updated>
     </task>
-    <task id="LOCAL-00001" summary="Authorname changed.">
-      <created>1427732147628</created>
-      <option name="number" value="00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1427732147628</updated>
-    </task>
     <task id="LOCAL-00002" summary="BlazePackage Konstruktor geändert.">
       <created>1427733659766</created>
       <option name="number" value="00002" />
@@ -882,7 +905,13 @@
       <option name="project" value="LOCAL" />
       <updated>1439062875368</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary=" V1.0.5&#10; &#10; Serialisierungs / Deserialisierungs-Methoden vollständig überarbeitet.&#10;&#10;">
+      <created>1439151954799</created>
+      <option name="number" value="00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1439151954799</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TodoView">
@@ -895,8 +924,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="-1448" y="108" width="1456" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.4978678" order="6" side_tool="false" content_ui="tabs" />
@@ -907,7 +936,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3284974" sideWeight="0.4914712" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.4936034" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1921875" sideWeight="0.4920635" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25625" sideWeight="0.4920635" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -994,7 +1023,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/testDragon/DragonBenchmark.java</url>
-          <line>78</line>
+          <line>73</line>
           <properties class="testDragon.DragonBenchmark" />
           <option name="timeStamp" value="80" />
         </line-breakpoint>
@@ -1328,45 +1357,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/testDragon/TestPackage.java">
+    <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/testDragon/TestPackageInit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="38" selection-start-line="33" selection-start-column="38" selection-end-line="33" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeDragon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeIDAlreadyExistsException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1374,7 +1386,7 @@
     <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazeModule.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -1382,7 +1394,7 @@
     <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazePackage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1390,7 +1402,7 @@
     <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/BlazePackageAlreadyIntegratedException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1398,16 +1410,38 @@
     <entry file="file://$PROJECT_DIR$/src/net/gc/blazedragon/UnfittingBlazeDataException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/testDragon/DragonBenchmark.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49945593">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testDragon/TestPackage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/testDragon/TestPackageInit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13802436">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
