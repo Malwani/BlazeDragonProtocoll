@@ -5,8 +5,7 @@ package net.gc.blazedragon;
     //                                        DATA-CLASS FOR THE DRAGON                                                 //
     //                                                                                                                  //
     //******************************************************************************************************************//
-
-public class BlazeData
+ public class BlazeData
 {
     private byte dataType;                                                                                              // Beinhaltet Blazedata-Type Indikator [Blazedragon]
 

@@ -54,6 +54,6 @@ public class TestPackageInit
 
     public static void addBdPackages(BlazeDragon bd) throws BlazePackageAlreadyIntegratedException
     {
-        bd.addPackage(new TestPackage(BlazeDragon.detectNextPackageID()));
+        bd.addPackage(new TestPackage());
     }
 }

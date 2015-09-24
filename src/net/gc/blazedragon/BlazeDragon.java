@@ -89,7 +89,7 @@ public class BlazeDragon
         }
     }
 
-    public static short detectNextPackageID()                                                                           // Nächste zu deklarierende Package ID ermitteln
+    protected static short detectNextPackageID()                                                                           // Nächste zu deklarierende Package ID ermitteln
     {
         if(packageDataInitValues.isEmpty())                                                                             // Wenn keine Größe vorhanden -> Next Index 0
         return (short) 0;

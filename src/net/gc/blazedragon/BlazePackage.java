@@ -35,11 +35,11 @@ public abstract class BlazePackage implements BlazeModule
         }
     }
 
-    public BlazePackage(short id)                                                                                       // Konstruktor zur Package Integration
+    public BlazePackage()                                                                                               // Konstruktor zur Package Integration
     {
         try
         {
-            BlazeDragon.addPackageInitVals(id, defineBlazeData());
+            BlazeDragon.addPackageInitVals(BlazeDragon.detectNextPackageID(), defineBlazeData());
         }
         catch(BlazeIDAlreadyExistsException ex)
         {

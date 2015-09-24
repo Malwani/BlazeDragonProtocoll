@@ -6,9 +6,9 @@ import net.gc.blazedragon.UnfittingBlazeDataException;
 
 public class TestPackage extends BlazePackage
 {
-    TestPackage(short ID)                                                                                               // Für BlazeDragon Init
+    TestPackage()                                                                                               // Für BlazeDragon Init
     {
-        super(ID);
+        super();
     }
 
     TestPackage(boolean init)                                                                                           // Normale Init (BD Init vorrausgesetzt))
